@@ -1,395 +1,639 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CV Cahyo Adi Nugroho</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Meta -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    /* ===== BASE ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <!-- Title -->
+    <title>CV Adi Nugroho</title>
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #2c3e50;
-      background: #f9fbfd;
-    }
+   
 
-    a {
-      text-decoration: none;
-      color: #e74c3c;
-    }
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i%7CPoppins:300,400,500,600" rel="stylesheet">
 
-    a:hover {
-      text-decoration: underline;
-    }
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
 
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
+    <!-- CSS Theme -->
+    <link id="theme" rel="stylesheet" href="assets/css/themes/theme-serif-blue.css" />
 
-    section {
-      padding: 80px 0;
-    }
+    <style>
+        a.merah {
+            color: red;
+          }
+    </style>
 
-    h3 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 50px;
-      color: #2c3e50;
-    }
-
-    /* ===== HEADER ===== */
-    #header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 220px;
-      height: 100vh;
-      background: #1a1f25;
-      color: white;
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 1000;
-    }
-
-    #header .photo img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #3498db;
-      display: block;
-      margin: 0 auto 20px;
-    }
-
-    #main-menu ul {
-      list-style: none;
-    }
-
-    #main-menu li {
-      margin: 16px 0;
-    }
-
-    #main-menu a {
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 500;
-    }
-
-    #main-menu a:hover {
-      color: #3498db;
-    }
-
-    .bottom .nav-icons {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .bottom .nav-icons a {
-      color: white;
-      font-size: 18px;
-    }
-
-    /* ===== MAIN CONTENT ===== */
-    #content {
-      margin-left: 220px;
-    }
-
-    /* ===== START SECTION ===== */
-    #start {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://academy.alterra.id/blog/wp-content/uploads/2023/01/Screen-Shot-2023-01-27-at-15.56.19.png');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    #start h1 {
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-    }
-
-    #start p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-
-    /* ===== PIXEL PORTFOLIO ===== */
-    .portfolio-pixel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 24px;
-    }
-
-    .pixel-card {
-      background: white;
-      border: 3px solid #4361ee;
-      border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      text-align: center;
-    }
-
-    .pixel-card:hover {
-      transform: translateY(-6px);
-      border-color: #ff6b6b;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-    }
-
-    .pixel-card img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: pixelated; /* ✨ Pixel art effect */
-    }
-
-    .pixel-card a {
-      display: block;
-      padding: 10px 8px;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 1.3;
-      color: #2c3e50;
-    }
-
-    /* ===== CONTACT ===== */
-    #contact {
-      background: #2980b9;
-      color: white;
-      text-align: center;
-    }
-
-    #contact h2 {
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      margin-top: 20px;
-    }
-
-    .contact-link {
-      background: rgba(255,255,255,0.15);
-      padding: 16px;
-      border-radius: 8px;
-      min-width: 180px;
-    }
-
-    .contact-link a {
-      color: white;
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-
-    .contact-link i {
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 992px) {
-      #header {
-        width: 70px;
-        padding: 20px 10px;
-      }
-      #header .photo img {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 15px;
-      }
-      #main-menu span, #main-menu a span {
-        display: none;
-      }
-      #main-menu a i {
-        font-size: 20px;
-      }
-      #content {
-        margin-left: 70px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      #header {
-        position: relative;
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        padding: 15px;
-      }
-      #header .photo img {
-        width: 50px;
-        height: 50px;
-        margin: 0 15px 0 0;
-      }
-      #main-menu {
-        flex: 1;
-      }
-      #main-menu ul {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-      }
-      #main-menu li {
-        margin: 0;
-      }
-      .bottom {
-        display: none;
-      }
-      #content {
-        margin-left: 0;
-      }
-      .portfolio-pixel-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      }
-    }
-
-    @media (max-width: 480px) {
-      .portfolio-pixel-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      #start h1 {
-        font-size: 2rem;
-      }
-    }
-  </style>
 </head>
 
 <body>
 
-  <!-- Header -->
-  <header id="header" class="header-vertical dark">
-    <a href="index.html" class="photo">
-      <img src="assets/gambar/pic.jpg" alt="Cahyo Adi Nugroho">
-    </a>
-
-    <nav id="main-menu">
-      <ul class="nav nav-vertical">
-        <li><a href="#start"><i class="fas fa-home"></i><span>Start</span></a></li>
-        <li><a href="#resume"><i class="fas fa-graduation-cap"></i><span>Resume</span></a></li>
-        <li><a href="#portofolio"><i class="fas fa-briefcase"></i><span>Portofolio</span></a></li>
-        <li><a href="#contact"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
-      </ul>
-    </nav>
-
-    <div class="bottom text-center">
-      <ul class="nav-icons nav-sm">
-        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-      </ul>
+    <!-- Loader -->
+    <div id="page-loader">
+        <svg class="loader" width="32px" height="32px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="circle" fill="none" stroke-width="5" stroke-linecap="round" cx="32" cy="32" r="32"></circle>
+        </svg>
     </div>
-  </header>
+    <!-- Loader / End -->
 
-  <!-- Content -->
-  <div id="content">
+    <!-- Header -->
+    <header id="header" class="header-vertical dark">
 
-    <!-- Start -->
-    <section id="start" class="fullheight dark bg-dark">
-      <h1 class="text-lg mb-0"><em>Hi! I’m</em> Adi Nugroho</h1>
-      <p class="lead text-muted">Supervisor IT Support & Full-Stack Developer</p>
-    </section>
+        <!-- Photo -->
+        <a href="index.html" class="photo">
+            <img src="assets/gambar/pic.jpg" alt="">
+        </a>
 
-    <!-- Portfolio ✨ PIXEL ART MODERN -->
-    <section id="portofolio" class="section">
-      <div class="container">
-        <h3>Portofolio</h3>
-        <div class="portfolio-pixel-grid">
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/parama.jpg" alt="Studio Parama">
-            <a href="https://www.studioparama.com/" target="_blank">Studio Parama<br><small>Yearbook Design</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/indorekor.png" alt="Indorekor">
-            <a href="https://www.indorekor.com/" target="_blank">Indorekor<br><small>Racing News</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/binary.jpg" alt="Binary Kiddo">
-            <a href="https://www.binarykiddo.id/" target="_blank">Binary Kiddo<br><small>Coding Academy</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/tdspaint.jpg" alt="TDS Paint">
-            <a href="https://www.tdspaint.co.id/" target="_blank">TDS Paint<br><small>Interior Paint</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/zengoods.jpg" alt="Zengoods">
-            <a href="https://www.zengoods.id/" target="_blank">Zengoods<br><small>E-commerce</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/cielocura.jpg" alt="Cielocura">
-            <a href="https://www.cielocura.com/" target="_blank">Cielocura<br><small>Fashion Brand</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/barbershop.jpg" alt="Barbershop">
-            <a href="https://classicalbarbershop.com/" target="_blank">Barbershop<br><small>Local Business</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/pos1.png" alt="POS System">
-            <a href="#">POS System<br><small>Internal Project</small></a>
-          </div>
-          <div class="pixel-card">
-            <img src="assets/gambar/projek/garansi.png" alt="Warranty System">
-            <a href="#">Warranty System<br><small>ERP Module</small></a>
-          </div>
+        <!-- Navigation -->
+        <nav id="main-menu">
+            <ul class="nav nav-vertical">
+                <li><a href="#start"><i class="pe-7s-home"></i><span>Start</span></a></li>
+                <li><a href="#resume"><i class="pe-7s-ribbon"></i><span>Resume</span></a></li>
+                <li><a href="#portofolio"><i class="pe-7s-copy-file"></i><span>Portofolio</span></a></li>
+                <li><a href="#contact"><i class="pe-7s-mail"></i><span>Contact</span></a></li>
+            </ul>
+            <span class="selector"></span>
+        </nav>
+
+        <!-- Bottom -->
+        <div class="bottom text-center">
+            <ul class="nav-icons nav-sm">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
         </div>
-      </div>
-    </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section min-fullheight">
-      <div class="container">
-        <h2>Contact Me!</h2>
-        <div class="contact-links">
-          <div class="contact-link">
-            <i class="fas fa-envelope"></i>
-            <a href="mailto:cahyo9823@gmail.com?subject=Inquiry">cahyo9823@gmail.com</a>
-          </div>
-          <div class="contact-link">
-            <i class="fab fa-whatsapp"></i>
-            <a href="https://wa.me/6287780319183">0877-8031-9183</a>
-          </div>
-          <div class="contact-link">
-            <i class="fas fa-map-marker-alt"></i>
-            <p>Tangerang, Indonesia</p>
-          </div>
+    </header>
+    <!-- Header / End -->
+
+    <!-- Content -->
+    <div id="content">
+
+        <!-- Section - Start -->
+        <section id="start" class="section fullheight dark bg-dark">
+
+            <!-- BG Image -->
+            <div class="bg-image zooming"><img
+                    src="https://academy.alterra.id/blog/wp-content/uploads/2023/01/Screen-Shot-2023-01-27-at-15.56.19.png"
+                    alt=""></div>
+
+            <div class="container container-custom v-center">
+
+                <h1 class="text-lg mb-0"><em>Hi! I’m</em> Adi Nugroho</h1>
+                <p class="lead text-muted">
+                    Passionate Full-Stack Developer with 5 Years of Industry Experience 
+                </p>
+            </div>
+
+        </section>
+
+        <section id="resume1" class="section">
+
+            <div class="container container-custom">
+                <p class="lead text-muted mb-80">I am a web developer with more than 5 years of experience, I have experience in creating mini erp, POS, compro and online
+                    store programs.</p>
+            </div>
+
+        </section>
+
+         <!-- Section - Latest Posts -->
+         <section id="portofolio" class="section pt-5">
+            <div class="container container-custom">
+                <h3 class="text-center mb-80">Portofolio</h3>
+                <!-- Post / Item -->
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/binary.jpg" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>01 January 2024</li>
+                            <li>Company Profile </li>
+                        </ul>
+                        <h4><a class="merah" target="_blank" href="https://www.binarykiddo.id/">binarykiddo</a></h4>
+                        <p>website Project company profile.</p>
+                    </div>
+                </article>
+                <!-- Post / Item -->
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/frontier.jpg" alt=""></div>
+                    <div class="post-content">
+                        <div>
+                            <ul class="post-meta">
+                                <li>25 December 2023</li>
+                                <li>Company Profile</li>
+                            </ul>
+                            <h4><a class="merah"  href="#">AutoFrontier</a></h4>
+                            <p>website Project company profile.</p>
+                        </div>
+                    </div>
+                </article>
+
+                    <!-- Post / Item -->
+                    <article class="post item">
+                        <div class="post-image"><img src="assets/gambar/projek/dandanoma.jpg" alt=""></div>
+                        <div class="post-content">
+                            <ul class="post-meta">
+                                <li>2024</li>
+                                <li>Company Profile</li>
+                            </ul>
+                            <h4><a class="merah"  href="#">Dandanoma</a></h4>
+                            <p>website Project company profile.</p>
+                        </div>
+                    </article>
+    
+                    <!-- Post / Item -->
+                    <article class="post item">
+                        <div class="post-image"><img src="assets/gambar/projek/tdspaint.jpg" alt=""></div>
+                        <div class="post-content">
+                            <ul class="post-meta">
+                                <li>2024</li>
+                                <li>Company Profile</li>
+                            </ul>
+                            <h4><a class="merah" target="_blank" href="https://www.tdspaint.co.id/">Tdspaint</a></h4>
+                            <p>website Project company profile.</p>
+                        </div>
+                    </article>
+
+                         <!-- Post / Item -->
+                         <article class="post item">
+                            <div class="post-image"><img src="assets/gambar/projek/zengoods.jpg" alt=""></div>
+                            <div class="post-content">
+                                <ul class="post-meta">
+                                    <li>2024</li>
+                                    <li>Company Profile</li>
+                                </ul>
+                                <h4><a class="merah" target="_blank" href="https://www.zengoods.id/">zengoods</a></h4>
+                                <p>website Project company profile.</p>
+                            </div>
+                        </article>
+        
+                        <!-- Post / Item -->
+                        <article class="post item">
+                            <div class="post-image"><img src="assets/gambar/projek/parama.jpg" alt=""></div>
+                            <div class="post-content">
+                                <ul class="post-meta">
+                                    <li>2025</li>
+                                    <li>Company Profile</li>
+                                </ul>
+                                <h4><a class="merah" target="_blank" href="https://www.studioparama.com/">parama</a></h4>
+                                <p>website Project company profile.</p>
+                            </div>
+                        </article>
+
+                         <!-- Post / Item -->
+                         <article class="post item">
+                            <div class="post-image"><img src="assets/gambar/projek/zencave.jpg" alt=""></div>
+                            <div class="post-content">
+                                <ul class="post-meta">
+                                    <li>2025</li>
+                                    <li>Company Profile</li>
+                                </ul>
+                                <h4><a class="merah"  href="#">zencave</a></h4>
+                                <p>website Project company profile.</p>
+                            </div>
+                        </article>
+
+                        <!-- Post / Item -->
+                        <article class="post item">
+                            <div class="post-image"><img src="assets/gambar/projek/cielocura.jpg" alt=""></div>
+                            <div class="post-content">
+                                <ul class="post-meta">
+                                    <li>2024</li>
+                                    <li>Company Profile</li>
+                                </ul>
+                                <h4><a class="merah" target="_blank" href="https://www.cielocura.com/">Cielocura</a></h4>
+                                <p>website Project company profile.</p>
+                            </div>
+                        </article>
+        
+                        <!-- Post / Item -->
+                        <article class="post item">
+                            <div class="post-image"><img src="assets/gambar/projek/barbershop.jpg" alt=""></div>
+                            <div class="post-content">
+                                <ul class="post-meta">
+                                    <li>2025</li>
+                                    <li>Company Profile</li>
+                                </ul>
+                                <h4><a class="merah" target="_blank" href="https://classicalbarbershop.com/">Barbershop</a></h4>
+                                <p>website Project company profile.</p>
+                            </div>
+                        </article>
+
+                <!-- Post / Item -->
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/indorekor.png" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>24 December 2018</li>
+                            <li>Company Profile</li>
+                        </ul>
+                        <h4><a class="merah" target="_blank" href="https://www.indorekor.com/">Indorekor</a></h4>
+                        <p>website Project company profile.</p>
+                    </div>
+                </article>
+
+                <!-- Post / Item -->
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/inviguard.jpg" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>18 October 2021</li>
+                            <li>Company Profile</li>
+                        </ul>
+                        <h4><a class="merah" target="_blank" href="https://www.inviguard.id/">Inviguard</a></h4>
+                        <p>website Project company profile.</p>
+                    </div>
+                </article>
+
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/jamsembilan.jpg" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>Company Profile</li>
+                        </ul>
+                        <h4><a class="merah"  href="#">Jam Sembilan Raw Food</a></h4>
+                        <p>website Project Company Profile.</p>
+                    </div>
+                </article>
+
+                <!-- Post / Item -->
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/reneehomewear.JPG" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>Company Profile</li>
+                        </ul>
+                        <h4><a class="merah" target="_blank" href="#">reneehomewear</a></h4>
+                        <p>website Project company profile.</p>
+                    </div>
+                </article>
+
+                     <!-- Post / Item -->
+                     <article class="post item">
+                        <div class="post-image"><img src="assets/gambar/projek/garansi.png" alt=""></div>
+                        <div class="post-content">
+                            <ul class="post-meta">
+                                <li>warranty system</li>
+                            </ul>
+                            <h4><a class="merah"  href="#">warranty system</a></h4>
+                            <p>website Project warranty system.</p>
+                        </div>
+                    </article>
+
+                         <!-- Post / Item -->
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/pos1.png" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>Pos System</li>
+                        </ul>
+                        <h4><a class="merah"  href="#">Pos System</a></h4>
+                        <p>website Project Pos System.</p>
+                    </div>
+                </article>
+
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/fluxury.png" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>Company Profile</li>
+                        </ul>
+                        <h4><a class="merah" href="#">AutoFluxury</a></h4>
+                        <p>website Project Pos System.</p>
+                    </div>
+                </article>
+
+           
+
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/lemisamu.jpg" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>Company Profile</li>
+                        </ul>
+                        <h4><a class="merah" href="#">Lemisamu</a></h4>
+                        <p>website Project Company Profile.</p>
+                    </div>
+                </article>
+
+                <article class="post item">
+                    <div class="post-image"><img src="assets/gambar/projek/kitabasodara.png" alt=""></div>
+                    <div class="post-content">
+                        <ul class="post-meta">
+                            <li>Company Profile</li>
+                        </ul>
+                        <h4><a class="merah" href="#">Kitabasodara</a></h4>
+                        <p>website Project Company Profile.</p>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- Section - Resume -->
+        <section id="resume" class="section">
+
+            <div class="container container-custom">
+               
+                <div class="row masonry long-spaces">
+                    <div class="masonry-sizer col-sm-6 col-xs-12"></div>
+                    <!-- Specialities -->
+                    <div class="masonry-item col-sm-6 col-xs-12">
+                        <div class="resume-card">
+                            <h3 class="title">My Specialities</h3>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <!-- Feature -->
+                                    <div class="feature feature-2">
+                                        <span class="icon icon-primary"><i class="pe-7s-browser"></i></span>
+                                        <div class="feature-content">
+                                            <h4>Web App</h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <!-- Feature -->
+                                    <div class="feature feature-2">
+                                        <span class="icon icon-primary"><i class="pe-7s-monitor"></i></span>
+                                        <div class="feature-content">
+                                            <h4>Webdesign</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Skills -->
+                    <div class="masonry-item col-sm-6 col-xs-12">
+                        <div class="resume-card">
+                            <h3 class="title">Skills</h3>
+                            <!-- Skill -->
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="skill">
+                                        <h5>- Photoshop </h5>
+                                    </div>
+                                    <div class="skill">
+                                        <h5>- Illustrator </h5>
+                                    </div>
+
+                                    <!-- Skill -->
+                                    <div class="skill">
+
+                                        <h5>- HTML / CSS</h5>
+                                    </div>
+                                    <!-- Skill -->
+                                    <div class="skill">
+
+                                        <h5>- JavaScript</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="skill">
+                                        <h5>- PHP </h5>
+                                    </div>
+                                    <div class="skill">
+                                        <h5>- Laravel </h5>
+                                    </div>
+
+                                    <!-- Skill -->
+                                    <div class="skill">
+                                        <h5>- Vue</h5>
+                                    </div>
+                                    <div class="skill">
+                                        <h5>- Nest</h5>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="skill">
+                                        <h5>- Wordpress </h5>
+                                    </div>
+                                    <div class="skill">
+                                        <h5>- Bootstrap </h5>
+                                    </div>
+
+                                    <!-- Skill -->
+                                    <div class="skill">
+                                        <h5>- Mysql</h5>
+                                    </div>
+                                    <div class="skill">
+                                        <h5>- Postgre SQL</h5>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <!-- Languages -->
+                    <div class="masonry-item col-sm-6 col-xs-12">
+                        <div class="resume-card">
+                            <h3 class="title">Languages</h3>
+                            <!-- Skill -->
+                            <div class="skill">
+                                <h5>- Bahasa</h5>
+                            </div>
+                            <div class="skill">
+                                <h5>- English</h5>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Educatin & Jobs -->
+                    <div class="masonry-item col-sm-6 col-xs-12">
+                        <div class="resume-card">
+                            <h3 class="title"> Jobs</h3>
+                            <div class="timeline">
+                                <!-- Event-->
+                                <div class="timeline-event animated">
+                                    <div class="content">
+                                        <span class="date">August 2016 – January 2017</span>
+                                        <h4>Kementrian UMKM Indonesia</h4>
+                                        <span class="caption">Front End Developer</span>
+                                    </div>
+                                </div>
+                                <!-- Event-->
+                                <div class="timeline-event animated">
+                                    <div class="content">
+                                        <span class="date">February 2017 – July 2017</span>
+                                        <h4>PT Robby Printing</h4>
+                                        <span class="caption">T-shirt designer </span>
+                                    </div>
+                                </div>
+                                <!-- Event-->
+                                <div class="timeline-event animated">
+                                    <div class="content">
+                                        <span class="date">February 2018 – October 2018</span>
+                                        <h4>PT Klaud.id</h4>
+                                        <span class="caption">Front end developer</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-event animated">
+                                    <div class="content">
+                                        <span class="date">October 2018 – August 2019</span>
+                                        <h4>PT Primawisata</h4>
+                                        <span class="caption">Fullstack web developer</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-event animated">
+                                    <div class="content">
+                                        <span class="date">August 2019 – October 2023</span>
+                                        <h4>PT Kharisma Autokreasi Permai </h4>
+                                        <span class="caption">IT and Fullstack web developer </span>
+                                    </div>
+                                </div>
+                                <div class="timeline-event animated">
+                                    <div class="content">
+                                        <span class="date">January 2022 – present</span>
+                                        <h4>Binary Kiddo (binarykiddo.id) </h4>
+                                        <span class="caption">Instructor Coding </span>
+                                    </div>
+                                </div>
+                                <div class="timeline-event animated">
+                                    <div class="content">
+                                        <span class="date">January 2024 – present</span>
+                                        <h4>Freelancer</h4>
+                                        <span class="caption">Software Developer </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hobbies -->
+                    <div class="masonry-item col-sm-6 col-xs-12">
+                        <div class="resume-card">
+                            <h3 class="title">Hobbies &amp; Interests</h3>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-4">
+                                    <!-- Feature -->
+                                    <div class="feature feature-1 text-center">
+                                        <span class="icon icon-primary"><i class="pe-7s-coffee"></i></span>
+                                        <h4>Cofee</h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <!-- Feature -->
+                                    <div class="feature feature-1 text-center">
+                                        <span class="icon icon-primary"><i class="pe-7s-headphones"></i></span>
+                                        <h4>Listen Music</h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <!-- Feature -->
+                                    <div class="feature feature-1 text-center">
+                                        <span class="icon icon-primary"><i class="pe-7s-joy"></i></span>
+                                        <h4>PLay Game</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+       
+
+        <!-- Section - Contact -->
+        <section id="contact" class="section min-fullheight">
+
+            <!-- BG Image -->
+       
+
+            <div class="container container-custom">
+                <div class="contact-box bg-primary dark animated" data-animation="fadeInDown"
+                    data-animation-delay="500">
+                    <div class="contact-box-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-50"> contact me!</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="feature feature-1">
+                                    <div class="icon"><span class="ti-desktop"></span></div>
+                                    <a href="mailto:cahyo9823@gmail.com?subject=pengen%20bikin%20website&body=hallo%20mas%20perkenalkan%20saya%20...%20mau%20bikin%20website%20..." class="h3 font-primary">cahyo9823@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="feature feature-1">
+                                    <div class="icon"><span class="ti-mobile"></span></div>
+                                    <a href="https://api.whatsapp.com/send?phone=6287780319183&text=Hallo%20salam%20kenal%20saya%20ingin%20membuat%20website%20..." class="h3 font-primary">0877-8031-9183</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="feature feature-1">
+                                    <div class="icon"><span class="ti-location-arrow"></span></div>
+                                    <address>
+                                        Tangerang, 
+                                       Indonesia
+                                        
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="sep-line">
+                        
+                    </div>
+                    <a href="#" class="contact-toggle"></a>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+    <!-- Content / End -->
+
+    <!-- Mobile Nav Toggle -->
+    <a href="#" id="vertical-nav-toggle" class="nav-toggle" data-toggle="mobile-nav"><span><span></span></span></a>
+
+
+
+    <!-- Ajax Modal -->
+    <div id="ajax-modal"></div>
+    <!-- Ajax Close -->
+    <a href="#" class="ajax-close" data-dismiss="ajax-modal"><i class="ti-close"></i></a>
+    <!-- Ajax Loader -->
+    <svg id="ajax-loader" class="loader" width="32px" height="32px" viewBox="0 0 66 66"
+        xmlns="http://www.w3.org/2000/svg">
+        <circle class="circle" fill="none" stroke-width="5" stroke-linecap="round" cx="32" cy="32" r="32"></circle>
+    </svg>
+
+    <!-- Modal / Video -->
+    <div class="modal modal-video fade" id="modalVideo" role="dialog">
+        <button class="close" data-dismiss="modal"><i class="ti-close"></i></button>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <iframe height="500"></iframe>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
 
-  </div>
+    <!-- JS Libraries -->
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+
+    <!-- JS Plugins -->
+    <script src="assets/js/plugins.js"></script>
+
+    <!-- JS Core -->
+    <script src="assets/js/core.js"></script>
+
+    <!-- JS Google Map -->
+    <script src="http://maps.google.com/maps/api/js"></script>
 
 </body>
+
 </html>
