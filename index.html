@@ -964,6 +964,11 @@
     <button class="message-btn" onclick="nextLevel()">NEXT LEVEL</button>
   </div>
 
+  <!-- AUDIO ELEMENTS -->
+  <audio id="motorSound" loop volume="0.3">
+    <source src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==" type="audio/wav">
+  </audio>
+
   <script>
     // CHECK MOBILE LANDSCAPE ORIENTATION
     function checkOrientation() {
@@ -1045,6 +1050,10 @@
     const PLAYER_SPEED = 10;
     const TOTAL_LEVELS = 9; // 1 + 1-prev + 4 portfolio levels + 3 (skills, exp, contact)
     const GATE_OFFSET = 100;
+
+    // Audio elements
+    const motorSound = document.getElementById('motorSound');
+    let isMotorPlaying = false;
 
     // Portfolio level mapping
     const portfolioLevels = {
@@ -1200,14 +1209,47 @@
     }
 
     function repositionGate() {
-      gate.style.right = '5%';
-      gate.style.bottom = '15%';
+      // Responsive gate positioning based on screen size
+      if (window.innerWidth <= 480) {
+        // Mobile: right 10%
+        gate.style.right = '10%';
+        gate.style.bottom = '12%';
+      } else if (window.innerWidth <= 768) {
+        // Tablet: right 10%
+        gate.style.right = '10%';
+        gate.style.bottom = '13%';
+      } else {
+        // Desktop: right 5%
+        gate.style.right = '5%';
+        gate.style.bottom = '15%';
+      }
     }
 
     function updatePlayer() {
       // Log current key states
       if (keys['ArrowLeft'] || keys['ArrowRight']) {
         console.log('🎮 Movement - Left:', keys['ArrowLeft'], 'Right:', keys['ArrowRight'], 'PlayerX:', Math.round(gameState.playerX));
+      }
+      
+      // Handle motor sound
+      if (keys['ArrowLeft'] || keys['ArrowRight']) {
+        if (!isMotorPlaying && motorSound) {
+          try {
+            motorSound.currentTime = 0;
+            motorSound.play().catch(e => console.log('Sound play denied:', e));
+            isMotorPlaying = true;
+            console.log('🔊 Motor sound started');
+          } catch (e) {
+            console.log('Cannot play motor sound:', e);
+          }
+        }
+      } else {
+        if (isMotorPlaying && motorSound) {
+          motorSound.pause();
+          motorSound.currentTime = 0;
+          isMotorPlaying = false;
+          console.log('🔊 Motor sound stopped');
+        }
       }
       
       if (keys['ArrowLeft']) {
