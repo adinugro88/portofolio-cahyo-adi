@@ -102,19 +102,21 @@
     /* Level 1 specific - 2 column layout */
     #level1 .level-info {
       display: flex;
-      gap: 40px;
+      gap: 20px;
       align-items: flex-start;
-      justify-content: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
     }
 
     #level1 .profile-section {
-      flex: 0 0 200px;
+      flex: 0 0 140px;
       text-align: center;
     }
 
     #level1 .level-info > div:not(.profile-section) {
       flex: 1;
-      max-width: 500px;
+      min-width: 200px;
+      max-width: 400px;
     }
 
     /* Hide previous gate at level 1 */
@@ -160,13 +162,13 @@
     /* PORTFOLIO GRID */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
       padding: 0;
       background: transparent;
       border: none;
       border-radius: 0;
-      max-height: 70vh;
+      max-height: 65vh;
       overflow-y: auto;
     }
 
@@ -175,30 +177,30 @@
       border: none;
       padding: 0;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      border-radius: 6px;
       overflow: hidden;
       transition: transform 0.2s ease;
     }
 
     .portfolio-item:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
 
     .portfolio-item img {
       width: 100%;
-      height: 150px;
+      height: 100px;
       object-fit: cover;
       border: none;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       display: block;
     }
 
     .portfolio-item p {
-      font-size: 8px;
+      font-size: 7px;
       color: var(--white);
       line-height: 1.2;
-      padding: 6px 8px;
+      padding: 4px 5px;
       margin: 0;
     }
 
@@ -375,52 +377,59 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 60px;
-      background: var(--black);
-      border-top: 4px solid var(--red);
+      height: 50px;
+      background: transparent;
+      border-top: none;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 0 20px;
-      z-index: 200;
+      padding: 0;
+      z-index: 190;
       color: var(--white);
       font-size: 11px;
       text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     }
 
     .hud-item {
-      background: var(--yellow);
-      color: var(--black);
-      padding: 8px 15px;
-      border: 3px solid var(--black);
-      box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+      background: transparent;
+      color: var(--white);
+      padding: 0;
+      border: none;
+      box-shadow: none;
       font-size: 10px;
+      display: none;
     }
 
     /* CONTROLS */
     .controls {
       position: fixed;
-      bottom: 70px;
-      right: 20px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      gap: 10px;
+      gap: 8px;
       z-index: 200;
+      justify-content: center;
+      width: 100%;
+      padding: 8px 0;
+      background: rgba(0, 0, 0, 0.7);
+      border-top: 3px solid var(--red);
     }
 
     .btn {
-      width: 50px;
-      height: 50px;
+      width: 45px;
+      height: 45px;
       background: var(--ocean);
-      border: 4px solid var(--black);
+      border: 3px solid var(--black);
       color: var(--white);
       font-family: 'Press Start 2P', cursive;
-      font-size: 20px;
+      font-size: 18px;
       display: flex;
       justify-content: center;
       align-items: center;
       user-select: none;
       cursor: pointer;
-      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
       transition: all 0.1s;
     }
 
@@ -606,7 +615,7 @@
         max-width: 95%;
         padding: 10px;
         font-size: 8px;
-        max-height: 65vh;
+        max-height: 60vh;
       }
       #level1 .level-info {
         flex-direction: column;
@@ -651,16 +660,20 @@
       .hud-item {
         padding: 4px 8px;
         font-size: 6px;
+        display: none;
       }
       
       .controls {
-        bottom: 50px;
+        bottom: 0;
+        gap: 6px;
+        padding: 6px 0;
       }
       
       .btn {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         font-size: 14px;
+        border: 2px solid var(--black);
       }
       
       .intro-box {
@@ -690,7 +703,7 @@
         max-width: 98%;
         padding: 10px;
         font-size: 7px;
-        max-height: 65vh;
+        max-height: 60vh;
       }
       #level1 .level-info {
         flex-direction: column;
@@ -737,18 +750,22 @@
       .hud-item {
         padding: 4px 8px;
         font-size: 6px;
+        display: none;
       }
       
       .controls {
-        bottom: 50px;
-        right: 8px;
-        gap: 5px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 4px;
+        padding: 6px 0;
       }
       
       .btn {
         width: 35px;
         height: 35px;
         font-size: 14px;
+        border: 2px solid var(--black);
       }
       
       .intro-box {
