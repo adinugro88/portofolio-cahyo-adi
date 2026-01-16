@@ -221,7 +221,7 @@
     /* CHARACTER SPRITE - MAIN PLAYER */
     #character {
       position: fixed;
-      width: 110px;
+      width: 350px;
       height: 140px;
       bottom: 25px;
       left: 0;
@@ -592,7 +592,7 @@
     }
 
     #landscapeWarning h1 {
-      font-size: 28px;
+      font-size: 20px;
       margin-bottom: 30px;
       color: var(--red);
       text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
@@ -1395,6 +1395,13 @@
           section.style.display = 'block';
         }
       });
+
+      // Hide gate-prev at level 1 (intro)
+      if (level === 1) {
+        gatePrev.style.display = 'none';
+      } else {
+        gatePrev.style.display = 'block';
+      }
     }
 
     function gameLoop() {
