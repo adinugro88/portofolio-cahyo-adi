@@ -1,626 +1,1252 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Adi Nugroho • Beach Road Adventure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sand: #F4A460;
+      --ocean: #1E90FF;
+      --sky: #87CEEB;
+      --dark-sand: #DEB887;
+      --road: #2F4F4F;
+      --white: #FFFFFF;
+      --black: #000000;
+      --yellow: #FFD700;
+      --green: #00AA00;
+      --red: #FF4444;
+    }
 
-    <!-- Meta -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <!-- Title -->
-    <title>CV Adi Nugroho</title>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Press Start 2P', cursive;
+      background: var(--black);
+      touch-action: none;
+    }
 
-   
+    #gameContainer {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
 
-    <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i%7CPoppins:300,400,500,600" rel="stylesheet">
+    .level-section {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease-out;
+    }
 
-    <!-- CSS Styles -->
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    /* URBAN CITY THEME BACKGROUNDS */
+    #level1 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level1-prev { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level2 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level2-1 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level2-2 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level2-3 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level3 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level4 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level5 { background: url('assets/karakter/bgall.webp') center/cover; }
 
-    <!-- CSS Theme -->
-    <link id="theme" rel="stylesheet" href="assets/css/themes/theme-serif-blue.css" />
+    /* ROAD - HIDDEN */
+    .road {
+      display: none;
+    }
 
-    <style>
-        a.merah {
-            color: red;
-          }
+    @keyframes roadMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 0; }
+    }
 
-        .mt-3{
-            margin-top: 25px;
-        }
-    </style>
+    /* LEVEL INFO BOX */
+    .level-info {
+      background: transparent;
+      border: none;
+      padding: 30px;
+      max-width: 90%;
+      margin: 0 auto;
+      color: var(--white);
+      font-size: 14px;
+      line-height: 1.8;
+      box-shadow: none;
+      border-radius: 0;
+      z-index: 10;
+      max-height: 80vh;
+      overflow-y: auto;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.9);
+    }
 
+    .level-info p {
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Level 1 specific - 2 column layout */
+    #level1 .level-info {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    #level1 .profile-section {
+      flex: 0 0 200px;
+      text-align: center;
+    }
+
+    #level1 .level-info > div:not(.profile-section) {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    /* Hide previous gate at level 1 */
+    #level1 .gate-prev {
+      display: none !important;
+    }
+
+    .level-title {
+      background: transparent;
+      color: var(--white);
+      padding: 0;
+      margin-bottom: 15px;
+      font-size: 24px;
+      border: none;
+      display: block;
+      box-shadow: none;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.9);
+    }
+
+    .profile-section {
+      text-align: center;
+      color: var(--white);
+      margin-top: 20px;
+    }
+
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      object-fit: cover;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      text-shadow: 2px 2px 0 var(--black);
+      margin-bottom: 10px;
+    }
+
+    /* PORTFOLIO GRID */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .portfolio-item {
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border: none;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .portfolio-item p {
+      font-size: 10px;
+      color: var(--white);
+      line-height: 1.3;
+      padding: 8px 10px;
+      margin: 0;
+    }
+
+    /* PLAYER CAR - VW KODOK - HIDDEN */
+    #player {
+      position: absolute;
+      width: 50px;
+      height: 38px;
+      bottom: 30%;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: carBounce 0.4s ease-in-out infinite;
+    }
+
+    /* CHARACTER SPRITE - MAIN PLAYER */
+    #character {
+      position: fixed;
+      width: 140px;
+      height: 180px;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 80;
+      background: url('assets/karakter/karakter.png') center/contain no-repeat;
+      opacity: 1;
+      pointer-events: none;
+      transition: bottom 0.1s ease-out;
+    }
+
+    @keyframes charJump {
+      0% { bottom: 60px; transform: translateX(-50%) scaleY(1); }
+      25% { bottom: 150px; transform: translateX(-50%) scaleY(0.8); }
+      50% { bottom: 170px; transform: translateX(-50%) scaleY(0.7); }
+      75% { bottom: 100px; transform: translateX(-50%) scaleY(0.85); }
+      100% { bottom: 60px; transform: translateX(-50%) scaleY(1); }
+    }
+
+    #character.jumping {
+      animation: charJump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .car-body {
+      width: 100%;
+      height: 100%;
+      background: #1a472a;
+      border: 3px solid var(--black);
+      border-radius: 10px 10px 5px 5px;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .car-window {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(50,50,50,0.8);
+      border: 1px solid var(--black);
+      top: 6px;
+      left: 6px;
+      border-radius: 2px;
+    }
+
+    .car-window::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(50,50,50,0.8);
+      border: 1px solid var(--black);
+      top: 0;
+      right: -10px;
+      border-radius: 2px;
+    }
+
+    .car-wheel {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: var(--black);
+      border: 2px solid #333;
+      border-radius: 50%;
+      bottom: -6px;
+    }
+
+    .car-wheel:first-of-type { left: 6px; }
+    .car-wheel:last-of-type { right: 6px; }
+
+    @keyframes carBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* NEXT SECTION ARROW */
+    .gate {
+      position: absolute;
+      width: auto;
+      height: auto;
+      bottom: 25%;
+      right: 5%;
+      z-index: 30;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: auto;
+      box-shadow: none;
+      border-radius: 0;
+      font-size: 28px;
+      animation: arrowBounce 0.8s ease-in-out infinite;
+      color: var(--yellow);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    }
+
+    .gate::before {
+      content: '→';
+      font-size: 48px;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    @keyframes arrowBounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(15px); }
+    }
+
+    .gate.open {
+      animation: none;
+      opacity: 1;
+    }
+
+    /* PREVIOUS SECTION ARROW */
+    .gate-prev {
+      position: absolute;
+      width: auto;
+      height: auto;
+      bottom: 20%;
+      left: 5%;
+      z-index: 30;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: auto;
+      box-shadow: none;
+      border-radius: 0;
+      font-size: 28px;
+      animation: arrowBouncePrev 0.8s ease-in-out infinite;
+      color: var(--yellow);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    }
+
+    .gate-prev::before {
+      content: '←';
+      font-size: 48px;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    @keyframes arrowBouncePrev {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-15px); }
+    }
+
+    .gate-prev.open {
+      animation: none;
+      opacity: 1;
+    }
+
+    /* HUD */
+    .hud {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--black);
+      border-top: 4px solid var(--red);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 200;
+      color: var(--white);
+      font-size: 11px;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    }
+
+    .hud-item {
+      background: var(--yellow);
+      color: var(--black);
+      padding: 8px 15px;
+      border: 3px solid var(--black);
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+      font-size: 10px;
+    }
+
+    /* CONTROLS */
+    .controls {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 200;
+    }
+
+    .btn {
+      width: 50px;
+      height: 50px;
+      background: var(--ocean);
+      border: 4px solid var(--black);
+      color: var(--white);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      transition: all 0.1s;
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    }
+
+    /* MESSAGE BOX */
+    .message-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--black);
+      border: 6px solid var(--red);
+      padding: 40px;
+      text-align: center;
+      color: var(--white);
+      z-index: 300;
+      display: none;
+      animation: messageAppear 0.3s ease-out;
+      max-width: 90%;
+    }
+
+    @keyframes messageAppear {
+      from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    .message-box.show { display: block; }
+
+    .message-box h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: var(--yellow);
+    }
+
+    .message-box p {
+      font-size: 10px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .message-btn {
+      background: var(--green);
+      color: var(--black);
+      padding: 10px 20px;
+      border: 3px solid var(--black);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 11px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+    }
+
+    .message-btn:hover { 
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    /* INTRO BOX */
+    .intro-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--black);
+      border: 6px solid var(--yellow);
+      padding: 50px 40px;
+      text-align: center;
+      color: var(--white);
+      z-index: 400;
+      display: none;
+      animation: introAppear 0.4s ease-out;
+      max-width: 85%;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    @keyframes introAppear {
+      from { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    .intro-box.show { display: block; }
+
+    .intro-box h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: var(--yellow);
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.9);
+    }
+
+    .intro-box p {
+      font-size: 14px;
+      margin-bottom: 15px;
+      line-height: 1.8;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
+    .intro-box .close-btn {
+      background: var(--green);
+      color: var(--black);
+      padding: 12px 30px;
+      border: 4px solid var(--black);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      margin-top: 20px;
+      transition: all 0.2s;
+    }
+
+    .intro-box .close-btn:hover {
+      background: var(--yellow);
+      color: var(--black);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+    }
+
+    .intro-box .close-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .level-info {
+        max-width: 90%;
+        padding: 20px;
+        font-size: 11px;
+      }
+      #level1 .level-info {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .portfolio-item img { height: 120px; }
+    }
+
+    /* MOBILE LANDSCAPE WARNING */
+    #landscapeWarning {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 20px;
+      padding: 20px;
+    }
+
+    #landscapeWarning.show {
+      display: flex;
+    }
+
+    #landscapeWarning h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: var(--red);
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+    }
+
+    #landscapeWarning p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .level-info {
+        max-width: 95%;
+        padding: 15px;
+        font-size: 9px;
+      }
+      #level1 .level-info {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-height: 60vh;
+      }
+      .portfolio-item img { height: 100px; }
+      .profile-photo { width: 120px; height: 120px; }
+      .profile-name { font-size: 13px; }
+      
+      #player {
+        width: 50px;
+        height: 35px;
+      }
+      
+      .gate {
+        width: auto;
+        height: auto;
+      }
+      
+      .gate::before { font-size: 12px; }
+      
+      .hud {
+        height: 55px;
+        font-size: 9px;
+      }
+      
+      .hud-item {
+        padding: 6px 12px;
+        font-size: 8px;
+      }
+      
+      .controls {
+        bottom: 65px;
+      }
+      
+      .btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .level-info {
+        max-width: 98%;
+        padding: 12px;
+        font-size: 8px;
+      }
+      #level1 .level-info {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .level-title {
+        font-size: 11px;
+      }
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .portfolio-item img { height: 80px; }
+      .profile-photo { width: 100px; height: 100px; }
+      .profile-name { font-size: 10px; }
+      
+      #player {
+        width: 45px;
+        height: 30px;
+      }
+      
+      .gate {
+        width: auto;
+        height: auto;
+      }
+      
+      .gate::before { font-size: 11px; }
+      
+      .hud {
+        height: 50px;
+        font-size: 8px;
+      }
+      
+      .hud-item {
+        padding: 5px 10px;
+        font-size: 7px;
+      }
+      
+      .controls {
+        bottom: 60px;
+        right: 10px;
+      }
+      
+      .btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <!-- MOBILE LANDSCAPE WARNING -->
+  <div id="landscapeWarning">
+    <h1>⚠️ LANDSCAPE MODE ⚠️</h1>
+    <p>Please rotate your device to landscape orientation</p>
+    <p>untuk bermain dengan optimal</p>
+  </div>
 
+  <!-- INTRO BOX -->
+  <div class="intro-box" id="introBox">
+    <h1>🎮 SELAMAT DATANG! 🎮</h1>
+    <p>Selamat datang di Portfolio Interaktif saya!</p>
+    <p>Ikuti perjalanan ini untuk melihat riwayat pekerjaan, portofolio, dan pencapaian saya selama bertahun-tahun.</p>
+    <p>Gunakan tombol panah untuk bergerak ke kanan atau kiri, dan tekan SPACE untuk melompat menuju gerbang berikutnya.</p>
+    <p>Setiap level bercerita tentang bagian penting dari karir saya. Semoga Anda menikmati pengalaman ini! 🚀</p>
+    <button class="close-btn" onclick="closeIntroBox()">MULAI PERJALANAN</button>
+  </div>
 
-    <!-- Header -->
-    <header id="header" class="header-vertical dark">
-
-        <!-- Photo -->
-        <a href="index.html" class="photo">
-            <img src="assets/gambar/1000060301.jpg" alt="">
-        </a>
-
-        <!-- Navigation -->
-        <nav id="main-menu">
-            <ul class="nav nav-vertical">
-                <li><a href="#start"><i class="pe-7s-home"></i><span>Start</span></a></li>
-                <li><a href="#portofolio"><i class="pe-7s-copy-file"></i><span>Portofolio</span></a></li>
-                <li><a href="#resume"><i class="pe-7s-ribbon"></i><span>Resume</span></a></li>
-                <li><a href="#contact"><i class="pe-7s-mail"></i><span>Contact</span></a></li>
-            </ul>
-            <span class="selector"></span>
-        </nav>
-
-
-    </header>
-    <!-- Header / End -->
-
-    <!-- Content -->
-    <div id="content">
-
-        <!-- Section - Start -->
-        <section id="start" class="section fullheight dark bg-dark">
-
-            <!-- BG Image -->
-            <div class="bg-image zooming"><img
-                    src="https://academy.alterra.id/blog/wp-content/uploads/2023/01/Screen-Shot-2023-01-27-at-15.56.19.png"
-                    alt=""></div>
-
-            <div class="container container-custom v-center">
-
-                <h1 class="text-lg mb-0"><em>Hi! I’m</em> Adi Nugroho</h1>
-                <h3 class="lead text-muted mt-3">
-                    Passionate Full-Stack Developer with 7 Years of Industry Experience 
-                </h3>
-            </div>
-
-        </section>
-
-        <section id="resume1" class="section">
-
-            <div class="container container-custom">
-                <p class="lead text-muted mb-80">
-                    I am an IT Support Supervisor and Full-Stack Developer, and I currently serve as a Coding Instructor for elementary, middle, and high school students at BinaryKiddo.id. I possess strong technical expertise in web development and extensive experience guiding students—from early childhood through adolescence—in understanding programming logic.
-                </p>
-            </div>
-
-        </section>
-
-         <!-- Section - Latest Posts -->
-         <section id="portofolio" class="section pt-5">
-            <div class="container container-custom">
-                <h3 class="text-center mb-80">Portofolio</h3>
-                <!-- Post / Item -->
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/binary.jpg" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>01 January 2024</li>
-                            <li>Company Profile </li>
-                        </ul>
-                        <h4><a class="merah" target="_blank" href="https://www.binarykiddo.id/">binarykiddo</a></h4>
-                        <p>website Project company profile.</p>
-                    </div>
-                </article>
-                <!-- Post / Item -->
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/frontier.jpg" alt=""></div>
-                    <div class="post-content">
-                        <div>
-                            <ul class="post-meta">
-                                <li>25 December 2023</li>
-                                <li>Company Profile</li>
-                            </ul>
-                            <h4><a class="merah"  href="https://autofrontier.co.id">AutoFrontier</a></h4>
-                            <p>website Project company profile.</p>
-                        </div>
-                    </div>
-                </article>
-
-                    <!-- Post / Item -->
-                    <article class="post item">
-                        <div class="post-image"><img src="assets/gambar/projek/dandanoma.jpg" alt=""></div>
-                        <div class="post-content">
-                            <ul class="post-meta">
-                                <li>2024</li>
-                                <li>Company Profile</li>
-                            </ul>
-                            <h4><a class="merah"  href="https://www.dandanoma.dopagency.my.id/">Dandanoma</a></h4>
-                            <p>website Project company profile.</p>
-                        </div>
-                    </article>
-    
-                    <!-- Post / Item -->
-                    <article class="post item">
-                        <div class="post-image"><img src="assets/gambar/projek/tdspaint.jpg" alt=""></div>
-                        <div class="post-content">
-                            <ul class="post-meta">
-                                <li>2024</li>
-                                <li>Company Profile</li>
-                            </ul>
-                            <h4><a class="merah" target="_blank" href="https://www.tdspaint.co.id/">Tdspaint</a></h4>
-                            <p>website Project company profile.</p>
-                        </div>
-                    </article>
-
-                         <!-- Post / Item -->
-                         <article class="post item">
-                            <div class="post-image"><img src="assets/gambar/projek/zengoods.jpg" alt=""></div>
-                            <div class="post-content">
-                                <ul class="post-meta">
-                                    <li>2024</li>
-                                    <li>Company Profile</li>
-                                </ul>
-                                <h4><a class="merah" target="_blank" href="#">zengoods</a></h4>
-                                <p>website Project company profile.</p>
-                            </div>
-                        </article>
-        
-                        <!-- Post / Item -->
-                        <article class="post item">
-                            <div class="post-image"><img src="assets/gambar/projek/parama.jpg" alt=""></div>
-                            <div class="post-content">
-                                <ul class="post-meta">
-                                    <li>2025</li>
-                                    <li>Company Profile</li>
-                                </ul>
-                                <h4><a class="merah" target="_blank" href="https://www.studioparama.com/">parama</a></h4>
-                                <p>website Project company profile.</p>
-                            </div>
-                        </article>
-
-                         <!-- Post / Item -->
-                         <article class="post item">
-                            <div class="post-image"><img src="assets/gambar/projek/zencave.jpg" alt=""></div>
-                            <div class="post-content">
-                                <ul class="post-meta">
-                                    <li>2025</li>
-                                    <li>Company Profile</li>
-                                </ul>
-                                <h4><a class="merah"  href="https://zencave.id">zencave</a></h4>
-                                <p>website Project company profile.</p>
-                            </div>
-                        </article>
-
-                        <!-- Post / Item -->
-                        <article class="post item">
-                            <div class="post-image"><img src="assets/gambar/projek/cielocura.jpg" alt=""></div>
-                            <div class="post-content">
-                                <ul class="post-meta">
-                                    <li>2024</li>
-                                    <li>Company Profile</li>
-                                </ul>
-                                <h4><a class="merah" target="_blank" href="#">Cielocura</a></h4>
-                                <p>website Project company profile.</p>
-                            </div>
-                        </article>
-        
-                        <!-- Post / Item -->
-                        <article class="post item">
-                            <div class="post-image"><img src="assets/gambar/projek/barbershop.jpg" alt=""></div>
-                            <div class="post-content">
-                                <ul class="post-meta">
-                                    <li>2025</li>
-                                    <li>Company Profile</li>
-                                </ul>
-                                <h4><a class="merah" target="_blank" href="https://barbershop.dopagency.my.id">Barbershop</a></h4>
-                                <p>website Project company profile.</p>
-                            </div>
-                        </article>
-
-                <!-- Post / Item -->
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/indorekor.png" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>24 December 2018</li>
-                            <li>Company Profile</li>
-                        </ul>
-                        <h4><a class="merah" target="_blank" href="https://www.indorekor.com/">Indorekor</a></h4>
-                        <p>website Project company profile.</p>
-                    </div>
-                </article>
-
-                <!-- Post / Item -->
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/inviguard.jpg" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>18 October 2021</li>
-                            <li>Company Profile</li>
-                        </ul>
-                        <h4><a class="merah" target="_blank" href="https://www.inviguard.id/">Inviguard</a></h4>
-                        <p>website Project company profile.</p>
-                    </div>
-                </article>
-
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/jamsembilan.jpg" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>Company Profile</li>
-                        </ul>
-                        <h4><a class="merah"  href="#">Jam Sembilan Raw Food</a></h4>
-                        <p>website Project Company Profile.</p>
-                    </div>
-                </article>
-
-                <!-- Post / Item -->
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/reneehomewear.JPG" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>Company Profile</li>
-                        </ul>
-                        <h4><a class="merah" target="_blank" href="#">reneehomewear</a></h4>
-                        <p>website Project company profile.</p>
-                    </div>
-                </article>
-
-                     <!-- Post / Item -->
-                     <article class="post item">
-                        <div class="post-image"><img src="assets/gambar/projek/garansi.png" alt=""></div>
-                        <div class="post-content">
-                            <ul class="post-meta">
-                                <li>warranty system</li>
-                            </ul>
-                            <h4><a class="merah"  href="#">warranty system</a></h4>
-                            <p>website Project warranty system.</p>
-                        </div>
-                    </article>
-
-                         <!-- Post / Item -->
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/pos1.png" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>Pos System</li>
-                        </ul>
-                        <h4><a class="merah"  href="#">Pos System</a></h4>
-                        <p>website Project Pos System.</p>
-                    </div>
-                </article>
-
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/fluxury.png" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>Company Profile</li>
-                        </ul>
-                        <h4><a class="merah" href="#">AutoFluxury</a></h4>
-                        <p>website Project Pos System.</p>
-                    </div>
-                </article>
-
-           
-
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/lemisamu.jpg" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>Company Profile</li>
-                        </ul>
-                        <h4><a class="merah" href="#">Lemisamu</a></h4>
-                        <p>website Project Company Profile.</p>
-                    </div>
-                </article>
-
-                <article class="post item">
-                    <div class="post-image"><img src="assets/gambar/projek/kitabasodara.png" alt=""></div>
-                    <div class="post-content">
-                        <ul class="post-meta">
-                            <li>Company Profile</li>
-                        </ul>
-                        <h4><a class="merah" href="#">Kitabasodara</a></h4>
-                        <p>website Project Company Profile.</p>
-                    </div>
-                </article>
-
-            </div>
-
-        </section>
-
-        <!-- Section - Resume -->
-        <section id="resume" class="section">
-
-            <div class="container container-custom">
-               
-                <div class="row masonry long-spaces">
-                    <div class="masonry-sizer col-sm-6 col-xs-12"></div>
-                    <!-- Specialities -->
-                    <div class="masonry-item col-sm-6 col-xs-12">
-                        <div class="resume-card">
-                            <h3 class="title">My Specialities</h3>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <!-- Feature -->
-                                    <div class="feature feature-2">
-                                        <span class="icon icon-primary"><i class="pe-7s-browser"></i></span>
-                                        <div class="feature-content">
-                                            <h4>Web App</h4>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-6">
-                                    <!-- Feature -->
-                                    <div class="feature feature-2">
-                                        <span class="icon icon-primary"><i class="pe-7s-monitor"></i></span>
-                                        <div class="feature-content">
-                                            <h4>Webdesign</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Skills -->
-                    <div class="masonry-item col-sm-6 col-xs-12">
-                        <div class="resume-card">
-                            <h3 class="title">Skills</h3>
-                            <!-- Skill -->
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="skill">
-                                        <h5>- Photoshop </h5>
-                                    </div>
-                                    <div class="skill">
-                                        <h5>- Illustrator </h5>
-                                    </div>
-
-                                    <!-- Skill -->
-                                    <div class="skill">
-
-                                        <h5>- HTML / CSS</h5>
-                                    </div>
-                                    <!-- Skill -->
-                                    <div class="skill">
-
-                                        <h5>- JavaScript</h5>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="skill">
-                                        <h5>- PHP </h5>
-                                    </div>
-                                    <div class="skill">
-                                        <h5>- Laravel </h5>
-                                    </div>
-
-                                    <!-- Skill -->
-                                    <div class="skill">
-                                        <h5>- Vue</h5>
-                                    </div>
-                                    <div class="skill">
-                                        <h5>- Nest</h5>
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="skill">
-                                        <h5>- Wordpress </h5>
-                                    </div>
-                                    <div class="skill">
-                                        <h5>- Bootstrap </h5>
-                                    </div>
-
-                                    <!-- Skill -->
-                                    <div class="skill">
-                                        <h5>- Mysql</h5>
-                                    </div>
-                                    <div class="skill">
-                                        <h5>- Postgre SQL</h5>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                    <!-- Languages -->
-                    <div class="masonry-item col-sm-6 col-xs-12">
-                        <div class="resume-card">
-                            <h3 class="title">Languages</h3>
-                            <!-- Skill -->
-                            <div class="skill">
-                                <h5>- Bahasa</h5>
-                            </div>
-                            <div class="skill">
-                                <h5>- English</h5>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Educatin & Jobs -->
-                    <div class="masonry-item col-sm-6 col-xs-12">
-                        <div class="resume-card">
-                            <h3 class="title"> Jobs</h3>
-                            <div class="timeline">
-                                <!-- Event-->
-                                <div class="timeline-event">
-                                    <div class="content">
-                                        <span class="date">August 2016 – January 2017</span>
-                                        <h4>Kementrian UMKM Indonesia</h4>
-                                        <span class="caption">Front End Developer</span>
-                                    </div>
-                                </div>
-                                <!-- Event-->
-                                <div class="timeline-event">
-                                    <div class="content">
-                                        <span class="date">February 2017 – July 2017</span>
-                                        <h4>PT Robby Printing</h4>
-                                        <span class="caption">T-shirt designer </span>
-                                    </div>
-                                </div>
-                                <!-- Event-->
-                                <div class="timeline-event">
-                                    <div class="content">
-                                        <span class="date">February 2018 – October 2018</span>
-                                        <h4>PT Klaud.id</h4>
-                                        <span class="caption">Front end developer</span>
-                                    </div>
-                                </div>
-                                <div class="timeline-event">
-                                    <div class="content">
-                                        <span class="date">October 2018 – August 2019</span>
-                                        <h4>PT Primawisata</h4>
-                                        <span class="caption">Fullstack web developer</span>
-                                    </div>
-                                </div>
-                                <div class="timeline-event">
-                                    <div class="content">
-                                        <span class="date">August 2019 – October 2023</span>
-                                        <h4>PT Kharisma Autokreasi Permai </h4>
-                                        <span class="caption">IT and Fullstack web developer </span>
-                                    </div>
-                                </div>
-                                <div class="timeline-event">
-                                    <div class="content">
-                                        <span class="date">January 2022 – present</span>
-                                        <h4>Binary Kiddo (binarykiddo.id) </h4>
-                                        <span class="caption">Instructor Coding </span>
-                                    </div>
-                                </div>
-                                <div class="timeline-event">
-                                    <div class="content">
-                                        <span class="date">January 2024 – present</span>
-                                        <h4>Freelancer</h4>
-                                        <span class="caption">Software Developer </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Hobbies -->
-                    <div class="masonry-item col-sm-6 col-xs-12">
-                        <div class="resume-card">
-                            <h3 class="title">Hobbies &amp; Interests</h3>
-                            <div class="row">
-                                <div class="col-sm-4 col-xs-4">
-                                    <!-- Feature -->
-                                    <div class="feature feature-1 text-center">
-                                        <span class="icon icon-primary"><i class="pe-7s-coffee"></i></span>
-                                        <h4>Cofee</h4>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-xs-4">
-                                    <!-- Feature -->
-                                    <div class="feature feature-1 text-center">
-                                        <span class="icon icon-primary"><i class="pe-7s-headphones"></i></span>
-                                        <h4>Listen Music</h4>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-xs-4">
-                                    <!-- Feature -->
-                                    <div class="feature feature-1 text-center">
-                                        <span class="icon icon-primary"><i class="pe-7s-joy"></i></span>
-                                        <h4>PLay Game</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-
-
-       
-
-        <!-- Section - Contact -->
-        <section id="contact" class="section min-fullheight">
-
-            <!-- BG Image -->
-       
-
-            <div class="container container-custom">
-                <div class="contact-box bg-primary dark">
-                    <div class="contact-box-content">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h2 class="mb-50"> contact me!</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="feature feature-1">
-                                    <div class="icon"><span class="ti-desktop"></span></div>
-                                    <a href="mailto:cahyo9823@gmail.com?subject=pengen%20bikin%20website&body=hallo%20mas%20perkenalkan%20saya%20...%20mau%20bikin%20website%20..." class="h3 font-primary">cahyo9823@gmail.com</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="feature feature-1">
-                                    <div class="icon"><span class="ti-mobile"></span></div>
-                                    <a href="https://api.whatsapp.com/send?phone=6282125189383&text=Hallo%20salam%20kenal%20saya%20ingin%20membuat%20website%20..." class="h3 font-primary">0821-2518-9383</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="feature feature-1">
-                                    <div class="icon"><span class="ti-location-arrow"></span></div>
-                                    <address>
-                                        Tangerang, 
-                                       Indonesia
-                                        
-                                    </address>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="sep-line">
-                        
-                    </div>
-                    <a href="#" class="contact-toggle"></a>
-                </div>
-            </div>
-
-        </section>
-
-    </div>
-    <!-- Content / End -->
-
-    <!-- Mobile Nav Toggle -->
-    <a href="#" id="vertical-nav-toggle" class="nav-toggle" data-toggle="mobile-nav"><span><span></span></span></a>
-
-
-
-    <!-- Ajax Modal -->
-    <div id="ajax-modal"></div>
-    <!-- Ajax Close -->
-    <a href="#" class="ajax-close" data-dismiss="ajax-modal"><i class="ti-close"></i></a>
-    <!-- Ajax Loader -->
-    <svg id="ajax-loader" class="loader" width="32px" height="32px" viewBox="0 0 66 66"
-        xmlns="http://www.w3.org/2000/svg">
-        <circle class="circle" fill="none" stroke-width="5" stroke-linecap="round" cx="32" cy="32" r="32"></circle>
-    </svg>
-
-    <!-- Modal / Video -->
-    <div class="modal modal-video fade" id="modalVideo" role="dialog">
-        <button class="close" data-dismiss="modal"><i class="ti-close"></i></button>
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <iframe height="500"></iframe>
-            </div>
+  <!-- GAME CONTAINER -->
+  <div id="gameContainer">
+    <!-- LEVEL 1: INTRO -->
+    <div id="level1" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="profile-section">
+          <img src="assets/gambar/1000060301.jpg" alt="Adi Nugroho" class="profile-photo">
+          <div class="profile-name">ADI NUGROHO</div>
         </div>
+        <div>
+          <div class="level-title">WELCOME TO MY PORTFOLIO</div>
+          <p>Hi! I'm Adi Nugroho</p>
+          <p>Passionate Full-Stack Developer with 7 Years of Industry Experience</p>
+          <p>I am an IT Support Supervisor and Full-Stack Developer serving and Coding Instructor at BinaryKiddo.id.</p>
+        </div>
+      </div>
     </div>
 
-    <!-- JS Libraries -->
-    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <!-- LEVEL 2: PORTFOLIO (1-3) -->
+    <div id="level2" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="level-title">PORTFOLIO</div>
+        <div class="portfolio-grid" id="portfolioGrid2">
+          <!-- Portfolio items akan ditambahkan via JavaScript -->
+        </div>
+      </div>
+    </div>
 
-    <!-- JS Plugins -->
-    <script src="assets/js/plugins.js"></script>
+    <!-- LEVEL 2.1: PORTFOLIO (4-6) -->
+    <div id="level2-1" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="level-title">PORTFOLIO (CONT.)</div>
+        <div class="portfolio-grid" id="portfolioGrid2-1">
+          <!-- Portfolio items akan ditambahkan via JavaScript -->
+        </div>
+      </div>
+    </div>
 
-    <!-- JS Core -->
-    <script src="assets/js/core.js"></script>
+    <!-- LEVEL 2.2: PORTFOLIO (7-9) -->
+    <div id="level2-2" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="level-title">PORTFOLIO (CONT.)</div>
+        <div class="portfolio-grid" id="portfolioGrid2-2">
+          <!-- Portfolio items akan ditambahkan via JavaScript -->
+        </div>
+      </div>
+    </div>
 
+    <!-- LEVEL 2.3: PORTFOLIO (10-12) -->
+    <div id="level2-3" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="level-title">PORTFOLIO (CONT.)</div>
+        <div class="portfolio-grid" id="portfolioGrid2-3">
+          <!-- Portfolio items akan ditambahkan via JavaScript -->
+        </div>
+      </div>
+    </div>
 
+    <!-- LEVEL 3: SKILLS -->
+    <div id="level3" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="level-title">SKILLS</div>
+        <p><strong>Specialities:</strong> Web App, Web Design</p>
+        <p><strong>Skills:</strong><br>
+        Photoshop, Illustrator, HTML/CSS, JavaScript, PHP, Laravel, Vue, Nest, WordPress, Bootstrap, MySQL, PostgreSQL</p>
+        <p><strong>Languages:</strong> Bahasa Indonesia, English</p>
+      </div>
+    </div>
 
+    <!-- LEVEL 4: EXPERIENCE -->
+    <div id="level4" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="level-title">EXPERIENCE</div>
+        <p><strong>Work History:</strong></p>
+        <p>• 2016-2017: Kementrian UMKM Indonesia - Front End Developer<br>
+        • 2017: PT Robby Printing - T-shirt Designer<br>
+        • 2018: PT Klaud.id - Front End Developer<br>
+        • 2018-2019: PT Primawisata - Fullstack Developer<br>
+        • 2019-2023: PT Kharisma Autokreasi - IT & Fullstack Developer<br>
+        • 2022-present: Binary Kiddo - Coding Instructor<br>
+        • 2024-present: Freelancer - Software Developer</p>
+      </div>
+    </div>
+
+    <!-- LEVEL 5: CONTACT -->
+    <div id="level5" class="level-section">
+      <div class="road"></div>
+      <div class="level-info">
+        <div class="level-title">CONTACT</div>
+        <p><strong>Let's Connect!</strong></p>
+        <p>📧 EMAIL: cahyo9823@gmail.com<br>
+        📱 WHATSAPP: 0821-2518-9383<br>
+        📍 LOCATION: Tangerang, Indonesia</p>
+        <p>Hobbies: Coffee, Listen Music, Play Game</p>
+        <p style="margin-top: 15px;"><strong>THANKS FOR EXPLORING!</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER CAR -->
+  <div id="player">
+    <div class="car-body">
+      <div class="car-window"></div>
+      <div class="car-wheel"></div>
+      <div class="car-wheel"></div>
+    </div>
+  </div>
+
+  <!-- CHARACTER SPRITE -->
+  <div id="character"></div>
+
+  <!-- GATE NEXT -->
+  <div class="gate"></div>
+
+  <!-- GATE PREVIOUS -->
+  <div class="gate-prev"></div>
+
+  <!-- HUD -->
+  <div class="hud">
+    <div class="hud-item">LEVEL: <span id="levelDisplay">1/5</span></div>
+    <div class="hud-item">← → DRIVE | REACH GATE</div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="btn" id="leftBtn">←</div>
+    <div class="btn" id="rightBtn">→</div>
+  </div>
+
+  <!-- MESSAGE BOX -->
+  <div class="message-box" id="messageBox">
+    <h2 id="messageTitle">Level Complete!</h2>
+    <p id="messageText">Great job! You reached the gate!</p>
+    <button class="message-btn" onclick="nextLevel()">NEXT LEVEL</button>
+  </div>
+
+  <script>
+    // CHECK MOBILE LANDSCAPE ORIENTATION
+    function checkOrientation() {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isPortrait = window.innerHeight > window.innerWidth;
+      const warningBox = document.getElementById('landscapeWarning');
+      
+      if (isMobile && isPortrait) {
+        warningBox.classList.add('show');
+        document.getElementById('gameContainer').style.display = 'none';
+      } else {
+        warningBox.classList.remove('show');
+        document.getElementById('gameContainer').style.display = 'flex';
+      }
+    }
+
+    // Check orientation on load and on resize
+    window.addEventListener('load', checkOrientation);
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+
+    // SHOW INTRO BOX ON LOAD
+    function showIntroBox() {
+      const introBox = document.getElementById('introBox');
+      if (introBox) {
+        setTimeout(() => {
+          introBox.classList.add('show');
+        }, 300);
+      }
+    }
+
+    function closeIntroBox() {
+      const introBox = document.getElementById('introBox');
+      if (introBox) {
+        introBox.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('load', () => {
+      checkOrientation();
+      showIntroBox();
+    });
+
+    const portfolioData = [
+      { name: 'binarykiddo', img: 'assets/gambar/projek/binary.jpg', desc: 'Company Profile', link: 'https://binarykiddo.id' },
+      { name: 'AutoFrontier', img: 'assets/gambar/projek/frontier.jpg', desc: 'Company Profile', link: 'https://autofrontier.com' },
+      { name: 'Dandanoma', img: 'assets/gambar/projek/dandanoma.jpg', desc: 'Company Profile', link: 'https://dandanoma.com' },
+      { name: 'Tdspaint', img: 'assets/gambar/projek/tdspaint.jpg', desc: 'Company Profile', link: 'https://tdspaint.com' },
+      { name: 'zengoods', img: 'assets/gambar/projek/zengoods.jpg', desc: 'E-Commerce', link: 'https://zengoods.com' },
+      { name: 'parama', img: 'assets/gambar/projek/parama.jpg', desc: 'Company Profile', link: 'https://parama.com' },
+      { name: 'zencave', img: 'assets/gambar/projek/zencave.jpg', desc: 'Company Profile', link: 'https://zencave.com' },
+      { name: 'Cielocura', img: 'assets/gambar/projek/cielocura.jpg', desc: 'Company Profile', link: 'https://cielocura.com' },
+      { name: 'Barbershop', img: 'assets/gambar/projek/barbershop.jpg', desc: 'Company Profile', link: 'https://barbershop.com' },
+      { name: 'Indorekor', img: 'assets/gambar/projek/indorekor.png', desc: 'Company Profile', link: 'https://indorekor.com' },
+      { name: 'Inviguard', img: 'assets/gambar/projek/inviguard.jpg', desc: 'Company Profile', link: 'https://inviguard.com' },
+      { name: 'Jam Sembilan', img: 'assets/gambar/projek/jamsembilan.jpg', desc: 'Raw Food', link: 'https://jamsembilan.com' }
+    ];
+
+    const gameState = {
+      currentLevel: 1,
+      playerX: window.innerWidth / 2,
+      playerY: window.innerHeight * 0.65,
+      playerWidth: 140,
+      playerHeight: 180,
+      gameWidth: window.innerWidth,
+      gameHeight: window.innerHeight,
+      gameRunning: true,
+      isJumping: false,
+      velocityY: 0,
+      gravity: 0.6,
+      jumpForce: 15
+    };
+
+    const player = document.getElementById('player');
+    const character = document.getElementById('character');
+    const gate = document.querySelector('.gate');
+    const gatePrev = document.querySelector('.gate-prev');
+    const keys = {};
+    const PLAYER_SPEED = 10;
+    const TOTAL_LEVELS = 9; // 1 + 1-prev + 4 portfolio levels + 3 (skills, exp, contact)
+    const GATE_OFFSET = 100;
+
+    // Portfolio level mapping
+    const portfolioLevels = {
+      2: { gridId: 'portfolioGrid2', start: 0, end: 3 },
+      2.1: { gridId: 'portfolioGrid2-1', start: 3, end: 6 },
+      2.2: { gridId: 'portfolioGrid2-2', start: 6, end: 9 },
+      2.3: { gridId: 'portfolioGrid2-3', start: 9, end: 12 }
+    };
+
+    function init() {
+      loadPortfolio();
+      updateHUD();
+      setupEventListeners();
+      repositionGate();
+      gameLoop();
+    }
+
+    function loadPortfolio() {
+      Object.keys(portfolioLevels).forEach(level => {
+        const config = portfolioLevels[level];
+        const grid = document.getElementById(config.gridId);
+        if (grid) {
+          for (let i = config.start; i < config.end && i < portfolioData.length; i++) {
+            const project = portfolioData[i];
+            const item = document.createElement('div');
+            item.className = 'portfolio-item';
+            item.style.cursor = 'pointer';
+            item.innerHTML = `
+              <img src="${project.img}" alt="${project.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23333%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2210%22%3E${project.name}%3C/text%3E%3C/svg%3E'">
+              <p><strong>${project.name}</strong></p>
+              <p>${project.desc}</p>
+            `;
+            item.addEventListener('click', () => {
+              window.open(project.link, '_blank');
+            });
+            grid.appendChild(item);
+          }
+        }
+      });
+    }
+
+    function setupEventListeners() {
+      document.addEventListener('keydown', (e) => {
+        if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+          keys[e.key] = true;
+          if (e.key === ' ') {
+            e.preventDefault();
+            performJump();
+          }
+        }
+      });
+
+      document.addEventListener('keyup', (e) => {
+        if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+          keys[e.key] = false;
+          if (e.key === ' ') e.preventDefault();
+        }
+      });
+
+      document.getElementById('leftBtn').addEventListener('mousedown', () => { keys['ArrowLeft'] = true; });
+      document.getElementById('leftBtn').addEventListener('mouseup', () => { keys['ArrowLeft'] = false; });
+      document.getElementById('leftBtn').addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowLeft'] = true; });
+      document.getElementById('leftBtn').addEventListener('touchend', (e) => { e.preventDefault(); keys['ArrowLeft'] = false; });
+
+      document.getElementById('rightBtn').addEventListener('mousedown', () => { keys['ArrowRight'] = true; });
+      document.getElementById('rightBtn').addEventListener('mouseup', () => { keys['ArrowRight'] = false; });
+      document.getElementById('rightBtn').addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowRight'] = true; });
+      document.getElementById('rightBtn').addEventListener('touchend', (e) => { e.preventDefault(); keys['ArrowRight'] = false; });
+
+      // Jump button
+      const jumpBtn = document.createElement('div');
+      jumpBtn.className = 'btn';
+      jumpBtn.id = 'jumpBtn';
+      jumpBtn.textContent = '↑';
+      jumpBtn.style.position = 'fixed';
+      jumpBtn.style.bottom = '70px';
+      jumpBtn.style.left = '20px';
+      jumpBtn.addEventListener('mousedown', performJump);
+      jumpBtn.addEventListener('touchstart', performJump);
+      document.body.appendChild(jumpBtn);
+    }
+
+    function performJump() {
+      if (!gameState.isJumping) {
+        gameState.isJumping = true;
+        gameState.velocityY = -gameState.jumpForce;
+        character.classList.add('jumping');
+        setTimeout(() => {
+          character.classList.remove('jumping');
+        }, 600);
+      }
+    }
+
+    function repositionGate() {
+      gate.style.right = '5%';
+      gate.style.bottom = 'calc(30% - 70px)';
+    }
+
+    function updatePlayer() {
+      if (keys['ArrowLeft']) {
+        gameState.playerX = Math.max(10, gameState.playerX - PLAYER_SPEED);
+      }
+      if (keys['ArrowRight']) {
+        gameState.playerX = Math.min(gameState.gameWidth - gameState.playerWidth - 10, gameState.playerX + PLAYER_SPEED);
+      }
+
+      // Apply gravity
+      gameState.velocityY += gameState.gravity;
+      gameState.playerY += gameState.velocityY;
+
+      // Ground collision
+      const groundY = window.innerHeight - 200; // Above HUD
+      if (gameState.playerY >= groundY) {
+        gameState.playerY = groundY;
+        gameState.velocityY = 0;
+        gameState.isJumping = false;
+      }
+
+      character.style.left = gameState.playerX + 'px';
+      character.style.bottom = (window.innerHeight - gameState.playerY - gameState.playerHeight) + 'px';
+
+      // Check collision with gate
+      checkGateReached();
+    }
+
+    function checkGateReached() {
+      const gateRect = gate.getBoundingClientRect();
+      const gatePrevRect = gatePrev.getBoundingClientRect();
+      const characterRect = character.getBoundingClientRect();
+
+      // Check next gate
+      if (
+        characterRect.right > gateRect.left &&
+        characterRect.left < gateRect.right &&
+        characterRect.bottom > gateRect.top &&
+        characterRect.top < gateRect.bottom
+      ) {
+        levelComplete();
+      }
+
+      // Check previous gate
+      if (
+        characterRect.right > gatePrevRect.left &&
+        characterRect.left < gatePrevRect.right &&
+        characterRect.bottom > gatePrevRect.top &&
+        characterRect.top < gatePrevRect.bottom
+      ) {
+        levelCompletePrev();
+      }
+    }
+
+    function levelComplete() {
+      if (!gameState.gameRunning) return;
+      gameState.gameRunning = false;
+      gate.classList.add('open');
+
+      // Auto proceed to next level without message
+      setTimeout(() => {
+        nextLevel();
+      }, 300);
+    }
+
+    function levelCompletePrev() {
+      if (!gameState.gameRunning) return;
+      gameState.gameRunning = false;
+      gatePrev.classList.add('open');
+
+      // Auto proceed to previous level without message
+      setTimeout(() => {
+        previousLevel();
+      }, 300);
+    }
+
+    function updateHUD() {
+      const levelMap = {
+        1: '1/9',
+        '1-prev': '2/9',
+        2: '3/9',
+        2.1: '4/9',
+        2.2: '5/9',
+        2.3: '6/9',
+        3: '7/9',
+        4: '8/9',
+        5: '9/9'
+      };
+      document.getElementById('levelDisplay').textContent = levelMap[gameState.currentLevel] || gameState.currentLevel + '/' + TOTAL_LEVELS;
+    }
+
+    function showMessage(title, text) {
+      const messageBox = document.getElementById('messageBox');
+      document.getElementById('messageTitle').textContent = title;
+      document.getElementById('messageText').textContent = text;
+      messageBox.classList.add('show');
+    }
+
+    function nextLevel() {
+      if (gameState.currentLevel >= TOTAL_LEVELS) {
+        // Final level reached
+        return;
+      }
+
+      gameState.currentLevel = getNextLevel(gameState.currentLevel);
+      gameState.gameRunning = true;
+      gameState.playerX = window.innerWidth / 2;
+      gameState.playerY = window.innerHeight - 240;
+      gameState.velocityY = 0;
+      gameState.isJumping = false;
+
+      gate.classList.remove('open');
+      updateHUD();
+
+      // Show next level section
+      showLevelSection(gameState.currentLevel);
+    }
+
+    function previousLevel() {
+      if (gameState.currentLevel <= 1) {
+        // Can't go before first level
+        return;
+      }
+
+      gameState.currentLevel = getPreviousLevel(gameState.currentLevel);
+      gameState.gameRunning = true;
+      gameState.playerX = window.innerWidth / 2;
+      gameState.playerY = window.innerHeight - 240;
+      gameState.velocityY = 0;
+      gameState.isJumping = false;
+
+      gatePrev.classList.remove('open');
+      updateHUD();
+
+      // Show previous level section
+      showLevelSection(gameState.currentLevel);
+    }
+
+    function getNextLevel(currentLevel) {
+      const levelProgression = [1, 2, 2.1, 2.2, 2.3, 3, 4, 5];
+      const currentIndex = levelProgression.indexOf(currentLevel);
+      if (currentIndex >= 0 && currentIndex < levelProgression.length - 1) {
+        return levelProgression[currentIndex + 1];
+      }
+      return currentLevel;
+    }
+
+    function getPreviousLevel(currentLevel) {
+      const levelProgression = [1, 2, 2.1, 2.2, 2.3, 3, 4, 5];
+      const currentIndex = levelProgression.indexOf(currentLevel);
+      if (currentIndex > 0) {
+        return levelProgression[currentIndex - 1];
+      }
+      return currentLevel;
+    }
+
+    function showLevelSection(level) {
+      const sections = document.querySelectorAll('.level-section');
+      const levelIdMap = {
+        1: 'level1',
+        2: 'level2',
+        2.1: 'level2-1',
+        2.2: 'level2-2',
+        2.3: 'level2-3',
+        3: 'level3',
+        4: 'level4',
+        5: 'level5'
+      };
+
+      const targetId = levelIdMap[level];
+      sections.forEach((section) => {
+        if (section.id === targetId) {
+          section.style.display = 'block';
+          section.style.transform = 'translateX(0)';
+        } else {
+          const targetIndex = Object.values(levelIdMap).indexOf(targetId);
+          const currentIndex = Object.values(levelIdMap).indexOf(section.id);
+          if (currentIndex < targetIndex) {
+            section.style.transform = 'translateX(-100%)';
+          } else {
+            section.style.transform = 'translateX(100%)';
+          }
+          section.style.display = 'block';
+        }
+      });
+    }
+
+    function gameLoop() {
+      updatePlayer();
+      requestAnimationFrame(gameLoop);
+    }
+
+    window.addEventListener('resize', () => {
+      gameState.gameWidth = window.innerWidth;
+      gameState.gameHeight = window.innerHeight;
+    });
+
+    // Initialize
+    showLevelSection(1);
+    init();
+  </script>
 </body>
-
 </html>

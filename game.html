@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Adi Nugroho • Bomberman Portfolio Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* ========== BOMBERMAN COLORS ========== */
+    :root {
+      --bomb-red: #FF3333;
+      --bomb-blue: #3366FF;
+      --bomb-green: #33CC33;
+      --bomb-yellow: #FFFF00;
+      --bomb-white: #FFFFFF;
+      --bomb-black: #000000;
+      --bomb-orange: #FF9933;
+      --bomb-purple: #CC33FF;
+      --bomb-pink: #FF3399;
+      --bomb-cyan: #00FFFF;
+      --bomb-dark: #1a1a2e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Press Start 2P', cursive;
+      background: var(--bomb-black);
+      touch-action: none;
+    }
+
+    /* ========== GAME CONTAINER ========== */
+    #gameContainer {
+      width: 100%;
+      height: calc(100vh - 80px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-level {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      display: none;
+      padding: 30px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .game-level.active {
+      display: flex;
+    }
+
+    /* Level Backgrounds - Urban Theme */
+    #level1 {
+      background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 100%);
+    }
+
+    #level2 {
+      background: linear-gradient(135deg, #4A90E2 0%, #7FB3D5 100%);
+    }
+
+    #level3 {
+      background: linear-gradient(135deg, #95C8D8 0%, #B8D4E3 100%);
+    }
+
+    #level4 {
+      background: linear-gradient(135deg, #6B8CAE 0%, #8B9BB4 100%);
+    }
+
+    #level5 {
+      background: linear-gradient(135deg, #FF9999 0%, #FFB3B3 100%);
+    }
+
+    .level-content {
+      background: rgba(0,0,0,0.8);
+      border: 4px solid var(--bomb-white);
+      padding: 25px;
+      max-width: 70vw;
+      color: var(--bomb-white);
+      font-size: 11px;
+      line-height: 1.6;
+      box-shadow: 8px 8px 0 rgba(0,0,0,0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    .level-title {
+      background: var(--bomb-red);
+      color: var(--bomb-white);
+      padding: 12px 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      border: 3px solid var(--bomb-black);
+      display: inline-block;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+    }
+
+    /* ========== PLAYER (VW KODOK) ========== */
+    #player {
+      position: absolute;
+      width: 45px;
+      height: 35px;
+      background: #1a472a;
+      border: 3px solid var(--bomb-black);
+      bottom: 83px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      box-shadow: 0 0 8px rgba(26, 71, 42, 0.6);
+      animation: playerBounce 0.4s ease-in-out infinite;
+      border-radius: 8px 8px 4px 4px;
+      position: relative;
+    }
+
+    /* VW Kodok Details */
+    #player::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--bomb-black);
+      border-radius: 50%;
+      top: 8px;
+      left: 8px;
+    }
+
+    #player::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--bomb-black);
+      border-radius: 50%;
+      top: 8px;
+      right: 8px;
+    }
+
+    @keyframes playerBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-4px); }
+    }
+
+    /* ========== COLLECTIBLES ========== */
+    .collectible {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--bomb-orange);
+      border: 2px solid var(--bomb-red);
+      border-radius: 50%;
+      z-index: 50;
+      animation: collectibleSpin 1s linear infinite;
+    }
+
+    @keyframes collectibleSpin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .collectible.collected {
+      animation: collectiblePop 0.5s ease-out forwards;
+    }
+
+    @keyframes collectiblePop {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+
+    /* ========== UI ========== */
+    .hud {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--bomb-black);
+      border-bottom: 4px solid var(--bomb-red);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 200;
+      color: var(--bomb-white);
+      font-size: 14px;
+    }
+
+    .hud-left, .hud-center, .hud-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hud-item {
+      background: var(--bomb-yellow);
+      color: var(--bomb-black);
+      padding: 8px 16px;
+      border: 3px solid var(--bomb-black);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+    }
+
+    .progress-bar {
+      width: 200px;
+      height: 20px;
+      background: var(--bomb-black);
+      border: 3px solid var(--bomb-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--bomb-yellow), var(--bomb-orange), var(--bomb-red));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .ground {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: repeating-linear-gradient(
+        90deg,
+        #333333 0px,
+        #333333 60px,
+        #FFD700 60px,
+        #FFD700 70px,
+        #333333 70px,
+        #333333 130px,
+        #FFD700 130px,
+        #FFD700 140px
+      );
+      border-top: 4px solid var(--bomb-black);
+      z-index: 150;
+    }
+
+    /* ========== CONTROLS ========== */
+    .controls {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 200;
+    }
+
+    .btn {
+      width: 50px;
+      height: 50px;
+      background: var(--bomb-cyan);
+      border: 4px solid var(--bomb-black);
+      color: var(--bomb-black);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      transition: all 0.1s;
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    }
+
+    /* ========== MESSAGES ========== */
+    .message-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bomb-black);
+      border: 6px solid var(--bomb-red);
+      padding: 40px;
+      text-align: center;
+      color: var(--bomb-white);
+      z-index: 300;
+      display: none;
+      animation: messageAppear 0.3s ease-out;
+    }
+
+    @keyframes messageAppear {
+      from {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .message-box.show {
+      display: block;
+    }
+
+    .message-box h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .message-box p {
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .message-btn {
+      background: var(--bomb-green);
+      color: var(--bomb-black);
+      padding: 10px 20px;
+      border: 3px solid var(--bomb-black);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+    }
+
+    .message-btn:hover {
+      background: var(--bomb-yellow);
+    }
+
+    /* ========== NEXT LEVEL ARROW ========== */
+    .next-arrow {
+      position: absolute;
+      bottom: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 32px;
+      z-index: 80;
+      animation: arrowBounce 0.8s ease-in-out infinite;
+      color: var(--bomb-yellow);
+      text-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+    }
+
+    @keyframes arrowBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .level-content {
+        max-width: 90vw;
+        font-size: 10px;
+      }
+
+      .hud {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+      }
+
+      .hud-left, .hud-center, .hud-right {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .progress-bar {
+        width: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HUD (Heads Up Display) -->
+  <div class="hud">
+    <div class="hud-left">
+      <div class="hud-item">LEVEL: <span id="levelDisplay">1/5</span></div>
+    </div>
+    <div class="hud-center">
+      <div>COLLECT STARS TO PROGRESS</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+    <div class="hud-right">
+      <div class="hud-item">★ <span id="pointsDisplay">0/5</span></div>
+    </div>
+  </div>
+
+  <!-- GAME CONTAINER -->
+  <div id="gameContainer">
+    <!-- LEVEL 1: START -->
+    <div id="level1" class="game-level active">
+      <div class="level-content">
+        <div class="level-title">🔥 LEVEL 1: START 🔥</div>
+        <h2 style="margin-bottom: 15px;">Hi! I'm Adi Nugroho</h2>
+        <p>Passionate Full-Stack Developer with 7 Years of Industry Experience</p>
+        <p style="margin-top: 15px;">I am an IT Support Supervisor and Full-Stack Developer, and I currently serve as a Coding Instructor for elementary, middle, and high school students at BinaryKiddo.id. I possess strong technical expertise in web development and extensive experience guiding students—from early childhood through adolescence—in understanding programming logic.</p>
+      </div>
+    </div>
+
+    <!-- LEVEL 2: PORTOFOLIO -->
+    <div id="level2" class="game-level">
+      <div class="level-content">
+        <div class="level-title">💣 LEVEL 2: PORTOFOLIO 💣</div>
+        <p>PROJECTS BUILT IN THE DEPTHS OF CODE:</p>
+        <p style="margin-top: 10px;">• binarykiddo - Company Profile<br>
+        • AutoFrontier - Company Profile<br>
+        • Dandanoma - Company Profile<br>
+        • Tdspaint - Company Profile<br>
+        • zengoods - Company Profile<br>
+        • parama - Company Profile<br>
+        • zencave - Company Profile<br>
+        • Indorekor - Company Profile<br>
+        • Inviguard - Company Profile</p>
+        <p style="margin-top: 10px;">Plus many more projects in web development!</p>
+      </div>
+    </div>
+
+    <!-- LEVEL 3: RESUME -->
+    <div id="level3" class="game-level">
+      <div class="level-content">
+        <div class="level-title">🎮 LEVEL 3: RESUME 🎮</div>
+        <p><strong>My Specialities:</strong> Web App, Web Design</p>
+        <p style="margin-top: 10px;"><strong>Skills:</strong><br>
+        Photoshop, Illustrator, HTML/CSS, JavaScript, PHP, Laravel, Vue, Nest, WordPress, Bootstrap, MySQL, PostgreSQL</p>
+        <p style="margin-top: 10px;"><strong>Languages:</strong> Bahasa Indonesia, English</p>
+      </div>
+    </div>
+
+    <!-- LEVEL 4: EXPERIENCE -->
+    <div id="level4" class="game-level">
+      <div class="level-content">
+        <div class="level-title">⭐ LEVEL 4: EXPERIENCE 🌟</div>
+        <p><strong>My Work History:</strong></p>
+        <p style="margin-top: 10px;">• August 2016 – January 2017: Kementrian UMKM Indonesia - Front End Developer<br>
+        • February 2017 – July 2017: PT Robby Printing - T-shirt designer<br>
+        • February 2018 – October 2018: PT Klaud.id - Front end developer<br>
+        • October 2018 – August 2019: PT Primawisata - Fullstack web developer<br>
+        • August 2019 – October 2023: PT Kharisma Autokreasi Permai - IT and Fullstack web developer<br>
+        • January 2022 – present: Binary Kiddo - Instructor Coding<br>
+        • January 2024 – present: Freelancer - Software Developer</p>
+      </div>
+    </div>
+
+    <!-- LEVEL 5: CONTACT -->
+    <div id="level5" class="game-level">
+      <div class="level-content">
+        <div class="level-title">🎯 FINAL LEVEL: CONTACT 🎯</div>
+        <p><strong>Let's Connect!</strong></p>
+        <p style="margin-top: 15px;">📧 EMAIL: cahyo9823@gmail.com<br>
+        📱 WHATSAPP: 0821-2518-9383<br>
+        📍 LOCATION: Tangerang, Indonesia</p>
+        <p style="margin-top: 15px;">Hobbies & Interests: Coffee, Listen Music, Play Game</p>
+        <p style="margin-top: 15px;"><strong>THANKS FOR EXPLORING MY PORTFOLIO!</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER -->
+  <div id="player"></div>
+
+  <!-- GROUND -->
+  <div class="ground"></div>
+
+  <!-- MOBILE CONTROLS -->
+  <div class="controls">
+    <div class="btn" id="leftBtn">←</div>
+    <div class="btn" id="rightBtn">→</div>
+  </div>
+
+  <!-- MESSAGE BOX -->
+  <div class="message-box" id="messageBox">
+    <h2 id="messageTitle">Level Complete!</h2>
+    <p id="messageText">Collect more stars to continue!</p>
+    <button class="message-btn" onclick="closeMessage()">OK</button>
+  </div>
+
+  <script>
+    // ========== GAME STATE ==========
+    const gameState = {
+      currentLevel: 1,
+      points: 0,
+      pointsNeeded: 5,
+      playerX: window.innerWidth / 2,
+      playerY: window.innerHeight - 130,
+      playerWidth: 40,
+      playerHeight: 50,
+      gameWidth: window.innerWidth,
+      gameHeight: window.innerHeight - 80,
+      collectibles: [],
+      canMove: true
+    };
+
+    const player = document.getElementById('player');
+    const keys = {};
+    let collectibleCount = 0;
+
+    // ========== CONSTANTS ==========
+    const PLAYER_SPEED = 5;
+    const TOTAL_LEVELS = 5;
+    const COLLECTIBLES_PER_LEVEL = 8;
+
+    // ========== INITIALIZATION ==========
+    function init() {
+      spawnCollectibles();
+      updateHUD();
+      setupEventListeners();
+      gameLoop();
+    }
+
+    // ========== EVENT LISTENERS ==========
+    function setupEventListeners() {
+      document.addEventListener('keydown', (e) => {
+        if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+          keys[e.key] = true;
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener('keyup', (e) => {
+        if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+          keys[e.key] = false;
+          e.preventDefault();
+        }
+      });
+
+      document.getElementById('leftBtn').addEventListener('mousedown', () => { keys['ArrowLeft'] = true; });
+      document.getElementById('leftBtn').addEventListener('mouseup', () => { keys['ArrowLeft'] = false; });
+      document.getElementById('leftBtn').addEventListener('touchstart', () => { keys['ArrowLeft'] = true; });
+      document.getElementById('leftBtn').addEventListener('touchend', () => { keys['ArrowLeft'] = false; });
+
+      document.getElementById('rightBtn').addEventListener('mousedown', () => { keys['ArrowRight'] = true; });
+      document.getElementById('rightBtn').addEventListener('mouseup', () => { keys['ArrowRight'] = false; });
+      document.getElementById('rightBtn').addEventListener('touchstart', () => { keys['ArrowRight'] = true; });
+      document.getElementById('rightBtn').addEventListener('touchend', () => { keys['ArrowRight'] = false; });
+    }
+
+    // ========== SPAWN COLLECTIBLES ==========
+    function spawnCollectibles() {
+      gameState.collectibles = [];
+      
+      for (let i = 0; i < COLLECTIBLES_PER_LEVEL; i++) {
+        const collectible = {
+          x: Math.random() * (gameState.gameWidth - 40) + 20,
+          y: Math.random() * (gameState.gameHeight - 200) + 100,
+          id: i,
+          collected: false
+        };
+        
+        gameState.collectibles.push(collectible);
+        renderCollectible(collectible);
+      }
+    }
+
+    function renderCollectible(collectible) {
+      const el = document.createElement('div');
+      el.className = 'collectible';
+      el.id = `collectible-${gameState.currentLevel}-${collectible.id}`;
+      el.style.left = collectible.x + 'px';
+      el.style.top = collectible.y + 'px';
+      document.getElementById(`level${gameState.currentLevel}`).appendChild(el);
+    }
+
+    // ========== COLLISION DETECTION ==========
+    function checkCollisions() {
+      gameState.collectibles.forEach((collectible) => {
+        if (collectible.collected) return;
+
+        const playerLeft = gameState.playerX;
+        const playerRight = gameState.playerX + gameState.playerWidth;
+        const playerTop = gameState.playerY;
+        const playerBottom = gameState.playerY + gameState.playerHeight;
+
+        const collectibleLeft = collectible.x;
+        const collectibleRight = collectible.x + 20;
+        const collectibleTop = collectible.y;
+        const collectibleBottom = collectible.y + 20;
+
+        if (playerRight > collectibleLeft &&
+            playerLeft < collectibleRight &&
+            playerBottom > collectibleTop &&
+            playerTop < collectibleBottom) {
+          
+          collectible.collected = true;
+          gameState.points++;
+          collectPointVisual(collectible);
+          
+          if (gameState.points >= gameState.pointsNeeded) {
+            completeLevel();
+          }
+        }
+      });
+    }
+
+    function collectPointVisual(collectible) {
+      const el = document.getElementById(`collectible-${gameState.currentLevel}-${collectible.id}`);
+      if (el) {
+        el.classList.add('collected');
+        setTimeout(() => el.remove(), 500);
+      }
+      updateHUD();
+    }
+
+    // ========== PLAYER MOVEMENT ==========
+    function updatePlayer() {
+      if (keys['ArrowLeft']) {
+        gameState.playerX = Math.max(0, gameState.playerX - PLAYER_SPEED);
+      }
+      if (keys['ArrowRight']) {
+        gameState.playerX = Math.min(gameState.gameWidth - gameState.playerWidth, gameState.playerX + PLAYER_SPEED);
+      }
+
+      player.style.left = gameState.playerX + 'px';
+      checkCollisions();
+    }
+
+    // ========== LEVEL COMPLETION ==========
+    function completeLevel() {
+      if (gameState.currentLevel >= TOTAL_LEVELS) {
+        showMessage('🎉 YOU WIN! 🎉', 'You completed the entire game! Thanks for exploring my portfolio!');
+      } else {
+        showMessage('LEVEL COMPLETE!', `Level ${gameState.currentLevel} finished! Ready for the next one?`);
+        showNextArrow();
+      }
+    }
+
+    function showNextArrow() {
+      const existingArrow = document.getElementById('nextArrow');
+      if (existingArrow) existingArrow.remove();
+      
+      const arrow = document.createElement('div');
+      arrow.id = 'nextArrow';
+      arrow.className = 'next-arrow';
+      arrow.textContent = '↓ NEXT SECTION ↓';
+      document.getElementById(`level${gameState.currentLevel}`).appendChild(arrow);
+    }
+
+    function nextLevel() {
+      if (gameState.currentLevel < TOTAL_LEVELS) {
+        // Hide current level
+        document.getElementById(`level${gameState.currentLevel}`).classList.remove('active');
+
+        // Move to next level
+        gameState.currentLevel++;
+        gameState.points = 0;
+
+        // Show next level
+        document.getElementById(`level${gameState.currentLevel}`).classList.add('active');
+
+        // Reset position and spawn new collectibles
+        gameState.playerX = gameState.gameWidth / 2 - gameState.playerWidth / 2;
+        spawnCollectibles();
+        updateHUD();
+        closeMessage();
+      }
+    }
+
+    // ========== UI UPDATES ==========
+    function updateHUD() {
+      document.getElementById('levelDisplay').textContent = `${gameState.currentLevel}/${TOTAL_LEVELS}`;
+      document.getElementById('pointsDisplay').textContent = `${gameState.points}/${gameState.pointsNeeded}`;
+      
+      const percentage = (gameState.points / gameState.pointsNeeded) * 100;
+      document.getElementById('progressFill').style.width = Math.min(percentage, 100) + '%';
+    }
+
+    function showMessage(title, text) {
+      const messageBox = document.getElementById('messageBox');
+      document.getElementById('messageTitle').textContent = title;
+      document.getElementById('messageText').textContent = text;
+      messageBox.classList.add('show');
+      
+      if (gameState.currentLevel < TOTAL_LEVELS) {
+        const btn = messageBox.querySelector('.message-btn');
+        btn.textContent = 'NEXT LEVEL';
+        btn.onclick = nextLevel;
+      }
+    }
+
+    function closeMessage() {
+      document.getElementById('messageBox').classList.remove('show');
+    }
+
+    // ========== GAME LOOP ==========
+    function gameLoop() {
+      updatePlayer();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // ========== RESIZE HANDLER ==========
+    window.addEventListener('resize', () => {
+      gameState.gameWidth = window.innerWidth;
+      gameState.gameHeight = window.innerHeight - 80;
+    });
+
+    // ========== START GAME ==========
+    init();
+  </script>
+</body>
+</html>
