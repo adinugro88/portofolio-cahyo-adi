@@ -57,15 +57,14 @@
     }
 
     /* URBAN CITY THEME BACKGROUNDS */
-    #level1 { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level1-prev { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level2 { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level2-1 { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level2-2 { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level2-3 { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level3 { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level4 { background: url('assets/karakter/bgall.webp') center/cover; }
-    #level5 { background: url('assets/karakter/bgall.webp') center/cover; }
+    #level1 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level2 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level2-1 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level2-2 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level2-3 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level3 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level4 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level5 { background: url('assets/karakter/bgku.webp') center/cover; }
 
     /* ROAD - HIDDEN */
     .road {
@@ -81,16 +80,16 @@
     .level-info {
       background: transparent;
       border: none;
-      padding: 15px;
+      padding: 25px;
       max-width: 90%;
       margin: 0 auto;
       color: var(--white);
-      font-size: 11px;
-      line-height: 1.4;
+      font-size: 18px;
+      line-height: 1.8;
       box-shadow: none;
       border-radius: 0;
       z-index: 10;
-      max-height: 70vh;
+      max-height: 75vh;
       overflow-y: auto;
       text-shadow: 0 0 8px rgba(0, 0, 0, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.9);
     }
@@ -102,21 +101,21 @@
     /* Level 1 specific - 2 column layout */
     #level1 .level-info {
       display: flex;
-      gap: 20px;
+      gap: 40px;
       align-items: flex-start;
       justify-content: flex-start;
       flex-wrap: wrap;
     }
 
     #level1 .profile-section {
-      flex: 0 0 140px;
+      flex: 0 0 160px;
       text-align: center;
     }
 
     #level1 .level-info > div:not(.profile-section) {
       flex: 1;
-      min-width: 200px;
-      max-width: 400px;
+      min-width: 250px;
+      max-width: 800px;
     }
 
     /* Hide previous gate at level 1 */
@@ -128,8 +127,8 @@
       background: transparent;
       color: var(--white);
       padding: 0;
-      margin-bottom: 10px;
-      font-size: 18px;
+      margin-bottom: 20px;
+      font-size: 32px;
       border: none;
       display: block;
       box-shadow: none;
@@ -144,8 +143,8 @@
     }
 
     .profile-photo {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 220px;
       border: none;
       border-radius: 8px;
       margin-bottom: 10px;
@@ -154,16 +153,17 @@
     }
 
     .profile-name {
-      font-size: 13px;
+      font-size: 20px;
       text-shadow: 2px 2px 0 var(--black);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      font-weight: bold;
     }
 
     /* PORTFOLIO GRID */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
       padding: 0;
       background: transparent;
       border: none;
@@ -189,19 +189,20 @@
 
     .portfolio-item img {
       width: 100%;
-      height: 100px;
+      height: 210px;
       object-fit: cover;
       border: none;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       display: block;
     }
 
     .portfolio-item p {
-      font-size: 7px;
+      font-size: 15px;
       color: var(--white);
-      line-height: 1.2;
-      padding: 4px 5px;
+      line-height: 1.4;
+      padding: 8px 10px;
       margin: 0;
+      font-weight: 500;
     }
 
     /* PLAYER CAR - VW KODOK - HIDDEN */
@@ -223,21 +224,19 @@
       width: 110px;
       height: 140px;
       bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
       z-index: 80;
       background: url('assets/karakter/karakter.png') center/contain no-repeat;
       opacity: 1;
       pointer-events: none;
-      transition: bottom 0.1s ease-out;
     }
 
     @keyframes charJump {
-      0% { bottom: 60px; transform: translateX(-50%) scaleY(1); }
-      25% { bottom: 150px; transform: translateX(-50%) scaleY(0.8); }
-      50% { bottom: 170px; transform: translateX(-50%) scaleY(0.7); }
-      75% { bottom: 100px; transform: translateX(-50%) scaleY(0.85); }
-      100% { bottom: 60px; transform: translateX(-50%) scaleY(1); }
+      0% { bottom: 25px; }
+      25% { bottom: 120px; }
+      50% { bottom: 160px; }
+      75% { bottom: 80px; }
+      100% { bottom: 25px; }
     }
 
     #character.jumping {
@@ -338,7 +337,7 @@
       position: absolute;
       width: auto;
       height: auto;
-      bottom: 50%;
+      bottom: 15%;
       left: 5%;
       z-index: 30;
       background: transparent;
@@ -411,20 +410,21 @@
     }
 
     .btn {
-      width: 45px;
-      height: 45px;
+      width: 50px;
+      height: 50px;
       background: var(--ocean);
-      border: 3px solid var(--black);
+      border: 4px solid var(--black);
       color: var(--white);
       font-family: 'Press Start 2P', cursive;
-      font-size: 18px;
+      font-size: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       user-select: none;
       cursor: pointer;
-      box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
       transition: all 0.1s;
+      pointer-events: auto;
     }
 
     .btn:active {
@@ -621,10 +621,10 @@
       }
       .portfolio-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
+        gap: 8px;
         max-height: 50vh;
       }
-      .portfolio-item img { height: 70px; }
+      .portfolio-item img { height: 100px; }
       .profile-photo { width: 90px; height: 90px; }
       .profile-name { font-size: 10px; }
       
@@ -826,7 +826,7 @@
           <div class="level-title">WELCOME TO MY PORTFOLIO</div>
           <p>Hi! I'm Adi Nugroho</p>
           <p>Passionate Full-Stack Developer with 7 Years of Industry Experience</p>
-          <p>I am an IT Support Supervisor and Full-Stack Developer serving and Coding Instructor at BinaryKiddo.id.</p>
+          <p>I am an IT Support Supervisor and Full-Stack Developer serving and Coding Instructor.</p>
         </div>
       </div>
     </div>
@@ -1078,44 +1078,105 @@
     }
 
     function setupEventListeners() {
+      // KEYBOARD EVENTS
       document.addEventListener('keydown', (e) => {
-        if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
-          keys[e.key] = true;
-          if (e.key === ' ') {
-            e.preventDefault();
-            performJump();
-          }
+        if (e.key === 'ArrowLeft') {
+          keys['ArrowLeft'] = true;
+          console.log('⬅️ KEYBOARD LEFT PRESSED - keys[ArrowLeft]:', keys['ArrowLeft']);
+        } else if (e.key === 'ArrowRight') {
+          keys['ArrowRight'] = true;
+          console.log('➡️ KEYBOARD RIGHT PRESSED - keys[ArrowRight]:', keys['ArrowRight']);
+        } else if (e.key === ' ') {
+          e.preventDefault();
+          performJump();
+          console.log('⬆️ SPACE JUMP PRESSED');
         }
       });
 
       document.addEventListener('keyup', (e) => {
-        if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
-          keys[e.key] = false;
-          if (e.key === ' ') e.preventDefault();
+        if (e.key === 'ArrowLeft') {
+          keys['ArrowLeft'] = false;
+          console.log('⬅️ KEYBOARD LEFT RELEASED - keys[ArrowLeft]:', keys['ArrowLeft']);
+        } else if (e.key === 'ArrowRight') {
+          keys['ArrowRight'] = false;
+          console.log('➡️ KEYBOARD RIGHT RELEASED - keys[ArrowRight]:', keys['ArrowRight']);
         }
       });
 
-      document.getElementById('leftBtn').addEventListener('mousedown', () => { keys['ArrowLeft'] = true; });
-      document.getElementById('leftBtn').addEventListener('mouseup', () => { keys['ArrowLeft'] = false; });
-      document.getElementById('leftBtn').addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowLeft'] = true; });
-      document.getElementById('leftBtn').addEventListener('touchend', (e) => { e.preventDefault(); keys['ArrowLeft'] = false; });
+      // LEFT BUTTON
+      const leftBtn = document.getElementById('leftBtn');
+      if (leftBtn) {
+        leftBtn.onmousedown = () => { 
+          keys['ArrowLeft'] = true;
+          console.log('🖱️ LEFT BUTTON MOUSE DOWN');
+        };
+        leftBtn.onmouseup = () => { 
+          keys['ArrowLeft'] = false;
+          console.log('🖱️ LEFT BUTTON MOUSE UP');
+        };
+        leftBtn.ontouchstart = (e) => { 
+          e.preventDefault(); 
+          keys['ArrowLeft'] = true;
+          console.log('👆 LEFT BUTTON TOUCH START');
+        };
+        leftBtn.ontouchend = (e) => { 
+          e.preventDefault(); 
+          keys['ArrowLeft'] = false;
+          console.log('👆 LEFT BUTTON TOUCH END');
+        };
+      }
 
-      document.getElementById('rightBtn').addEventListener('mousedown', () => { keys['ArrowRight'] = true; });
-      document.getElementById('rightBtn').addEventListener('mouseup', () => { keys['ArrowRight'] = false; });
-      document.getElementById('rightBtn').addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowRight'] = true; });
-      document.getElementById('rightBtn').addEventListener('touchend', (e) => { e.preventDefault(); keys['ArrowRight'] = false; });
+      // RIGHT BUTTON
+      const rightBtn = document.getElementById('rightBtn');
+      if (rightBtn) {
+        rightBtn.onmousedown = () => { 
+          keys['ArrowRight'] = true;
+          console.log('🖱️ RIGHT BUTTON MOUSE DOWN');
+        };
+        rightBtn.onmouseup = () => { 
+          keys['ArrowRight'] = false;
+          console.log('🖱️ RIGHT BUTTON MOUSE UP');
+        };
+        rightBtn.ontouchstart = (e) => { 
+          e.preventDefault(); 
+          keys['ArrowRight'] = true;
+          console.log('👆 RIGHT BUTTON TOUCH START');
+        };
+        rightBtn.ontouchend = (e) => { 
+          e.preventDefault(); 
+          keys['ArrowRight'] = false;
+          console.log('👆 RIGHT BUTTON TOUCH END');
+        };
+      }
 
-      // Jump button
-      const jumpBtn = document.createElement('div');
-      jumpBtn.className = 'btn';
-      jumpBtn.id = 'jumpBtn';
-      jumpBtn.textContent = '↑';
-      jumpBtn.style.position = 'fixed';
-      jumpBtn.style.bottom = '70px';
-      jumpBtn.style.left = '20px';
-      jumpBtn.addEventListener('mousedown', performJump);
-      jumpBtn.addEventListener('touchstart', performJump);
-      document.body.appendChild(jumpBtn);
+      // JUMP BUTTON
+      let jumpBtn = document.getElementById('jumpBtn');
+      if (!jumpBtn) {
+        jumpBtn = document.createElement('div');
+        jumpBtn.className = 'btn';
+        jumpBtn.id = 'jumpBtn';
+        jumpBtn.textContent = '↑';
+        jumpBtn.style.position = 'fixed';
+        jumpBtn.style.bottom = '70px';
+        jumpBtn.style.left = '20px';
+        jumpBtn.style.width = '50px';
+        jumpBtn.style.height = '50px';
+        jumpBtn.style.zIndex = '200';
+        document.body.appendChild(jumpBtn);
+        console.log('✅ Jump button created');
+      }
+      
+      jumpBtn.onmousedown = () => { 
+        performJump();
+        console.log('🖱️ JUMP BUTTON MOUSE DOWN');
+      };
+      jumpBtn.ontouchstart = (e) => { 
+        e.preventDefault(); 
+        performJump();
+        console.log('👆 JUMP BUTTON TOUCH START');
+      };
+      
+      console.log('✅ Event listeners setup complete');
     }
 
     function performJump() {
@@ -1131,10 +1192,15 @@
 
     function repositionGate() {
       gate.style.right = '5%';
-      gate.style.bottom = 'calc(30% - 70px)';
+      gate.style.bottom = '15%';
     }
 
     function updatePlayer() {
+      // Log current key states
+      if (keys['ArrowLeft'] || keys['ArrowRight']) {
+        console.log('🎮 Movement - Left:', keys['ArrowLeft'], 'Right:', keys['ArrowRight'], 'PlayerX:', Math.round(gameState.playerX));
+      }
+      
       if (keys['ArrowLeft']) {
         gameState.playerX = Math.max(10, gameState.playerX - PLAYER_SPEED);
       }
@@ -1221,7 +1287,11 @@
         4: '8/9',
         5: '9/9'
       };
-      document.getElementById('levelDisplay').textContent = levelMap[gameState.currentLevel] || gameState.currentLevel + '/' + TOTAL_LEVELS;
+      // Safely update HUD if element exists
+      const levelDisplay = document.getElementById('levelDisplay');
+      if (levelDisplay) {
+        levelDisplay.textContent = levelMap[gameState.currentLevel] || gameState.currentLevel + '/' + TOTAL_LEVELS;
+      }
     }
 
     function showMessage(title, text) {
@@ -1321,7 +1391,9 @@
     }
 
     function gameLoop() {
-      updatePlayer();
+      if (gameState.gameRunning) {
+        updatePlayer();
+      }
       requestAnimationFrame(gameLoop);
     }
 
@@ -1330,9 +1402,24 @@
       gameState.gameHeight = window.innerHeight;
     });
 
-    // Initialize
-    showLevelSection(1);
-    init();
+    // ENSURE JUMP BUTTON EXISTS AND WORKS PROPERLY
+    window.addEventListener('load', () => {
+      // Pastikan karakter visible
+      character.style.display = 'block';
+      character.style.position = 'fixed';
+      
+      // Start game loop
+      showLevelSection(1);
+      init();
+      
+      // Check jump button after init
+      setTimeout(() => {
+        const jumpBtn = document.getElementById('jumpBtn');
+        if (jumpBtn) {
+          console.log('Jump button exists and ready');
+        }
+      }, 100);
+    });
   </script>
 </body>
 </html>
