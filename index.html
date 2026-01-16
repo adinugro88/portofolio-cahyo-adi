@@ -1184,12 +1184,8 @@
         jumpBtn.id = 'jumpBtn';
         jumpBtn.textContent = '↑';
         jumpBtn.style.position = 'fixed';
-        //cek mobile bottom jadi nol 
-        if (window.innerWidth <= 768) {
-          jumpBtn.style.bottom = '0px';
-        } else {
-          jumpBtn.style.bottom = '70px';
-        }
+        // Responsive bottom position: 0 on mobile, 70px on desktop
+        jumpBtn.style.bottom = window.innerWidth <= 480 ? '0' : '70px';
         jumpBtn.style.left = '20px';
         jumpBtn.style.width = '50px';
         jumpBtn.style.height = '50px';
