@@ -716,9 +716,9 @@
     @media (max-width: 480px) {
       .level-section {
         background-attachment: scroll;
-        background-size: contain;
+        background-size: 100% auto;
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: top center;
       }
 
       .level-info {
@@ -727,6 +727,19 @@
         font-size: 7px;
         max-height: 60vh;
       }
+    }
+
+    /* Mobile Landscape Mode */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .level-section {
+        background-attachment: scroll;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+
+    @media (max-width: 480px) {
       #level1 .level-info {
         flex-direction: column;
         gap: 8px;
