@@ -296,10 +296,10 @@
 
     /* NEXT SECTION ARROW */
     .gate {
-      position: absolute;
+      position: fixed;
       width: auto;
       height: auto;
-      bottom: 50%;
+      bottom: 15%;
       right: 5%;
       z-index: 30;
       background: transparent;
@@ -641,7 +641,8 @@
       .gate {
         width: auto;
         height: auto;
-        right:10%;
+        bottom: 13%;
+        right: 10%;
       }
 
       #level1 .level-info > div:not(.profile-section) {
@@ -744,7 +745,8 @@
       .gate {
         width: auto;
         height: auto;
-        bottom: 50%;
+        bottom: 12%;
+        right: 3%;
       }
       
       .gate::before { font-size: 24px; }
@@ -1239,6 +1241,12 @@
       const gatePrevRect = gatePrev.getBoundingClientRect();
       const characterRect = character.getBoundingClientRect();
 
+      // Debug: log positions periodically (every 30 frames)
+      if (Math.random() < 0.05) {
+        console.log('🎯 Character:', {x: Math.round(characterRect.left), y: Math.round(characterRect.top), w: Math.round(characterRect.width), h: Math.round(characterRect.height)});
+        console.log('🚪 Gate:', {x: Math.round(gateRect.left), y: Math.round(gateRect.top), w: Math.round(gateRect.width), h: Math.round(gateRect.height)});
+      }
+
       // Check next gate
       if (
         characterRect.right > gateRect.left &&
@@ -1246,6 +1254,7 @@
         characterRect.bottom > gateRect.top &&
         characterRect.top < gateRect.bottom
       ) {
+        console.log('✅ GATE COLLISION DETECTED!');
         levelComplete();
       }
 
@@ -1256,6 +1265,7 @@
         characterRect.bottom > gatePrevRect.top &&
         characterRect.top < gatePrevRect.bottom
       ) {
+        console.log('✅ PREVIOUS GATE COLLISION DETECTED!');
         levelCompletePrev();
       }
     }
