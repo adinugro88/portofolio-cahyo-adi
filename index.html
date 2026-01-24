@@ -735,7 +735,9 @@
 
     /* TABLET & MOBILE */
     @media (max-width: 768px) {
-      .level-info {
+      .level-info,
+  .level-info p,
+  .level-info div  {
         max-width: 95%;
         padding: 10px;
         font-size: 11px!Important;
@@ -862,23 +864,23 @@
         background-position: top center;
       }
 
-      .level-info {
+      .level-info,
+  .level-info p,
+  .level-info div  {
         max-width: 98%;
         padding: 10px;
-        font-size: 7px!important;
+        font-size: 8px!important;
         /* ✅ INI AKAN BERLAKU DI HP KECIL */
         max-height: 60vh;
       }
+
 
       #level1 .level-info {
         flex-direction: column;
         gap: 8px;
       }
 
-      .level-title {
-        font-size: 11px;
-        margin-bottom: 6px;
-      }
+   
 
       .portfolio-grid {
         grid-template-columns: 3fr;
@@ -903,7 +905,7 @@
         font-size: 9px;
       }
 
-      #character {
+      #character img{
         width: 50px!important;
         height: 110px!important;
         bottom: 20px;
