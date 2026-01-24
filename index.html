@@ -40,14 +40,16 @@ html, body {
 }
 .level-section {
   width: 100%;
-  min-height: 100dvh; /* ✅ gunakan dvh */
-  position: relative;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-size: cover;
   background-position: center top;
-  background-attachment: fixed; /* hanya desktop */
+  background-attachment: fixed;
   transition: transform 0.3s ease-out;
 }
 /* URBAN CITY THEME BACKGROUNDS */
@@ -597,12 +599,11 @@ html, body {
 }
 
 @media (max-width: 480px) {
-   .level-section {
+  .level-section {
     background-attachment: scroll;
-    background-size: 100% auto; /* ✅ lebar penuh, tinggi otomatis */
+    background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: top center;
-    min-height: 100dvh;
   }
   .level-info { padding: 10px; font-size: 8px; max-width: 98%; max-height: 60vh; }
   .level-title { font-size: 15px; }
@@ -621,10 +622,9 @@ html, body {
 @media (max-width: 768px) and (orientation: landscape) {
   .level-section {
     background-attachment: scroll;
-    background-size: 100% auto; /* ✅ lebar penuh, tinggi otomatis */
+    background-size: auto 100%;
     background-repeat: no-repeat;
-    background-position: top center;
-    min-height: 100dvh;
+    background-position: center;
   }
 }
 </style>
