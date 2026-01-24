@@ -115,7 +115,7 @@
     #level1 .level-info > div:not(.profile-section) {
       flex: 1;
       min-width: 250px;
-      max-width: 800px;
+      max-width: 550px;
     }
 
     /* Hide previous gate at level 1 */
@@ -177,7 +177,6 @@
       border: none;
       padding: 0;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       border-radius: 6px;
       overflow: hidden;
       transition: transform 0.2s ease;
@@ -221,7 +220,7 @@
     /* CHARACTER SPRITE - MAIN PLAYER */
     #character {
       position: fixed;
-      width: 350px;
+      width: 150px;
       height: 140px;
       bottom: 25px;
       left: 0;
@@ -593,7 +592,7 @@
       .level-info {
         max-width: 90%;
         padding: 20px;
-        font-size: 11px;
+        font-size: 15px;
       }
       #level1 .level-info {
         flex-direction: column;
@@ -1037,14 +1036,7 @@
     <button class="message-btn" onclick="nextLevel()">NEXT LEVEL</button>
   </div>
 
-  <!-- SOUND TOGGLE BUTTON -->
-  <div class="sound-toggle-btn" id="soundToggleBtn">🔊</div>
-
-  <!-- AUDIO ELEMENTS -->
-  <audio id="motorSound" loop autoplay>
-    <source src="assets/sound/motor.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  
 
   <script>
     // CHECK MOBILE LANDSCAPE ORIENTATION
@@ -1076,6 +1068,8 @@
         }, 300);
       }
     }
+
+    
 
     function closeIntroBox() {
       const introBox = document.getElementById('introBox');
@@ -1114,7 +1108,7 @@
 
     const gameState = {
       currentLevel: 1,
-      playerX: 10,
+      playerX: (window.innerWidth - 380) / 2, // 140 = lebar karakter
       playerY: window.innerHeight * 0.65,
       playerWidth: 140,
       playerHeight: 180,
@@ -1370,7 +1364,7 @@
       // Check collision with gate
       checkGateReached();
     }
-
+    let collisionCooldown = false;
     function checkGateReached() {
       const gateRect = gate.getBoundingClientRect();
       const gatePrevRect = gatePrev.getBoundingClientRect();
@@ -1461,7 +1455,7 @@
 
       gameState.currentLevel = getNextLevel(gameState.currentLevel);
       gameState.gameRunning = true;
-      gameState.playerX = 10;
+      gameState.playerX = (window.innerWidth - gameState.playerWidth) / 2;
       gameState.playerY = window.innerHeight - 240;
       gameState.velocityY = 0;
       gameState.isJumping = false;
@@ -1481,7 +1475,7 @@
 
       gameState.currentLevel = getPreviousLevel(gameState.currentLevel);
       gameState.gameRunning = true;
-      gameState.playerX = 10;
+      gameState.playerX = (window.innerWidth - gameState.playerWidth) / 2;
       gameState.playerY = window.innerHeight - 240;
       gameState.velocityY = 0;
       gameState.isJumping = false;
