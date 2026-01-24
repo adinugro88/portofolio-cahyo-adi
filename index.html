@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -25,7 +26,8 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -57,23 +59,50 @@
     }
 
     /* URBAN CITY THEME BACKGROUNDS */
-    #level1 { background: url('assets/karakter/bgku.webp') center/cover; }
-    #level2 { background: url('assets/karakter/bgku.webp') center/cover; }
-    #level2-1 { background: url('assets/karakter/bgku.webp') center/cover; }
-    #level2-2 { background: url('assets/karakter/bgku.webp') center/cover; }
-    #level2-3 { background: url('assets/karakter/bgku.webp') center/cover; }
-    #level3 { background: url('assets/karakter/bgku.webp') center/cover; }
-    #level4 { background: url('assets/karakter/bgku.webp') center/cover; }
-    #level5 { background: url('assets/karakter/bgku.webp') center/cover; }
+    #level1 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
 
-    /* ROAD - HIDDEN */
+    #level2 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
+
+    #level2-1 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
+
+    #level2-2 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
+
+    #level2-3 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
+
+    #level3 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
+
+    #level4 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
+
+    #level5 {
+      background: url('assets/karakter/bgku.webp') center/cover;
+    }
+
     .road {
       display: none;
     }
 
     @keyframes roadMove {
-      0% { background-position: 0 0; }
-      100% { background-position: 40px 0; }
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 40px 0;
+      }
     }
 
     /* LEVEL INFO BOX */
@@ -112,13 +141,12 @@
       text-align: center;
     }
 
-    #level1 .level-info > div:not(.profile-section) {
+    #level1 .level-info>div:not(.profile-section) {
       flex: 1;
       min-width: 250px;
-      max-width: 550px;
+      max-width: 800px;
     }
 
-    /* Hide previous gate at level 1 */
     #level1 .gate-prev {
       display: none !important;
     }
@@ -148,7 +176,7 @@
       border: none;
       border-radius: 8px;
       margin-bottom: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       object-fit: cover;
     }
 
@@ -177,6 +205,7 @@
       border: none;
       padding: 0;
       text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       border-radius: 6px;
       overflow: hidden;
       transition: transform 0.2s ease;
@@ -220,7 +249,7 @@
     /* CHARACTER SPRITE - MAIN PLAYER */
     #character {
       position: fixed;
-      width: 150px;
+      width: 350px;
       height: 140px;
       bottom: 25px;
       left: 0;
@@ -231,11 +260,25 @@
     }
 
     @keyframes charJump {
-      0% { bottom: 25px; }
-      25% { bottom: 120px; }
-      50% { bottom: 160px; }
-      75% { bottom: 80px; }
-      100% { bottom: 25px; }
+      0% {
+        bottom: 25px;
+      }
+
+      25% {
+        bottom: 120px;
+      }
+
+      50% {
+        bottom: 160px;
+      }
+
+      75% {
+        bottom: 80px;
+      }
+
+      100% {
+        bottom: 25px;
+      }
     }
 
     #character.jumping {
@@ -249,14 +292,14 @@
       border: 3px solid var(--black);
       border-radius: 10px 10px 5px 5px;
       position: relative;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
     .car-window {
       position: absolute;
       width: 8px;
       height: 8px;
-      background: rgba(50,50,50,0.8);
+      background: rgba(50, 50, 50, 0.8);
       border: 1px solid var(--black);
       top: 6px;
       left: 6px;
@@ -268,7 +311,7 @@
       position: absolute;
       width: 8px;
       height: 8px;
-      background: rgba(50,50,50,0.8);
+      background: rgba(50, 50, 50, 0.8);
       border: 1px solid var(--black);
       top: 0;
       right: -10px;
@@ -285,12 +328,24 @@
       bottom: -6px;
     }
 
-    .car-wheel:first-of-type { left: 6px; }
-    .car-wheel:last-of-type { right: 6px; }
+    .car-wheel:first-of-type {
+      left: 6px;
+    }
+
+    .car-wheel:last-of-type {
+      right: 6px;
+    }
 
     @keyframes carBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
     }
 
     /* NEXT SECTION ARROW */
@@ -322,8 +377,15 @@
     }
 
     @keyframes arrowBounce {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(15px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(15px);
+      }
     }
 
     .gate.open {
@@ -360,8 +422,15 @@
     }
 
     @keyframes arrowBouncePrev {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(-15px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(-15px);
+      }
     }
 
     .gate-prev.open {
@@ -421,14 +490,14 @@
       align-items: center;
       user-select: none;
       cursor: pointer;
-      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
       transition: all 0.1s;
       pointer-events: auto;
     }
 
     .btn:active {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
     }
 
     /* SOUND TOGGLE BUTTON */
@@ -448,24 +517,23 @@
       align-items: center;
       user-select: none;
       cursor: pointer;
-      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
       transition: all 0.1s;
       z-index: 200;
     }
 
     .sound-toggle-btn:active {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
     }
 
     .sound-toggle-btn.muted {
       background: var(--red);
     }
 
-    /* RESPONSIVE SOUND BUTTON */
     @media (max-width: 480px) {
       .sound-toggle-btn {
-        bottom: 0px!important;
+        bottom: 0 !important;
         left: 80px;
       }
     }
@@ -488,11 +556,20 @@
     }
 
     @keyframes messageAppear {
-      from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      from {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
     }
 
-    .message-box.show { display: block; }
+    .message-box.show {
+      display: block;
+    }
 
     .message-box h2 {
       font-size: 18px;
@@ -514,10 +591,10 @@
       font-family: 'Press Start 2P', cursive;
       font-size: 11px;
       cursor: pointer;
-      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
     }
 
-    .message-btn:hover { 
+    .message-btn:hover {
       background: var(--yellow);
       color: var(--black);
     }
@@ -542,11 +619,20 @@
     }
 
     @keyframes introAppear {
-      from { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      from {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
     }
 
-    .intro-box.show { display: block; }
+    .intro-box.show {
+      display: block;
+    }
 
     .intro-box h1 {
       font-size: 22px;
@@ -570,7 +656,7 @@
       font-family: 'Press Start 2P', cursive;
       font-size: 14px;
       cursor: pointer;
-      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
       margin-top: 20px;
       transition: all 0.2s;
     }
@@ -579,30 +665,35 @@
       background: var(--yellow);
       color: var(--black);
       transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
     }
 
     .intro-box .close-btn:active {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
     }
 
-    /* RESPONSIVE */
+    /* RESPONSIVE: TABLET & BELOW */
     @media (max-width: 1024px) {
       .level-info {
         max-width: 90%;
         padding: 20px;
-        font-size: 15px;
+        font-size: 11px;
       }
+
       #level1 .level-info {
         flex-direction: column;
         gap: 20px;
       }
+
       .portfolio-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
       }
-      .portfolio-item img { height: 120px; }
+
+      .portfolio-item img {
+        height: 120px;
+      }
     }
 
     /* MOBILE LANDSCAPE WARNING */
@@ -642,6 +733,7 @@
       line-height: 1.6;
     }
 
+    /* TABLET & MOBILE */
     @media (max-width: 768px) {
       .level-info {
         max-width: 95%;
@@ -649,66 +741,76 @@
         font-size: 11px;
         max-height: 60vh;
       }
+
       #level1 .level-info {
         flex-direction: column;
         gap: 8px;
       }
+
       .level-title {
         font-size: 12px;
         margin-bottom: 6px;
       }
+
       .portfolio-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         max-height: 50vh;
       }
 
-
       .portfolio-item p {
         font-size: 10px;
       }
 
-      .portfolio-item img { height: 100px; }
-      .profile-photo { width: 90px; height: 90px; }
-      .profile-name { font-size: 10px; }
-      
+      .portfolio-item img {
+        height: 100px;
+      }
+
+      .profile-photo {
+        width: 90px;
+        height: 90px;
+      }
+
+      .profile-name {
+        font-size: 10px;
+      }
+
       #character {
         width: 85px;
         height: 110px;
       }
-      
+
       #player {
         width: 35px;
         height: 25px;
       }
-      
+
       .gate {
-        width: auto;
-        height: auto;
         bottom: 13%;
         right: 10%;
       }
 
-      #level1 .level-info > div:not(.profile-section) {
-      flex: 1;
-      min-width: 250px;
-      max-width: 500px;
-    }
-      
-      .gate::before { font-size: 24px; }
-      .gate-prev::before { font-size: 24px; left:10%; }
-      
+      #level1 .level-info>div:not(.profile-section) {
+        flex: 1;
+        min-width: 250px;
+        max-width: 500px;
+      }
+
+      .gate::before,
+      .gate-prev::before {
+        font-size: 24px;
+      }
+
       .hud {
         height: 45px;
         font-size: 7px;
       }
-      
+
       .hud-item {
         padding: 4px 8px;
         font-size: 6px;
-        display: none;
       }
-      
+
       .controls {
         bottom: 0;
         right: auto;
@@ -721,29 +823,29 @@
         border-top: 3px solid var(--red);
         justify-content: right;
       }
-      
+
       .btn {
         width: 38px;
         height: 38px;
         font-size: 14px;
         border: 2px solid var(--black);
       }
-      
+
       .intro-box {
         max-width: 90%;
         padding: 15px 12px;
       }
-      
+
       .intro-box h1 {
         font-size: 16px;
         margin-bottom: 8px;
       }
-      
+
       .intro-box p {
         font-size: 9px;
         margin-bottom: 6px;
       }
-      
+
       .intro-box .close-btn {
         font-size: 9px;
         padding: 6px 12px;
@@ -751,6 +853,7 @@
       }
     }
 
+    /* SMALL MOBILE (≤480px) — FINAL OVERRIDE */
     @media (max-width: 480px) {
       .level-section {
         background-attachment: scroll;
@@ -763,7 +866,115 @@
         max-width: 98%;
         padding: 10px;
         font-size: 7px;
+        /* ✅ INI AKAN BERLAKU DI HP KECIL */
         max-height: 60vh;
+      }
+
+      #level1 .level-info {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .level-title {
+        font-size: 11px;
+        margin-bottom: 6px;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 3fr;
+        gap: 6px;
+        max-height: 50vh;
+      }
+
+      .portfolio-item p {
+        font-size: 10px;
+      }
+
+      .portfolio-item img {
+        height: 70px;
+      }
+
+      .profile-photo {
+        width: 80px;
+        height: 80px;
+      }
+
+      .profile-name {
+        font-size: 9px;
+      }
+
+      #character {
+        width: 50px;
+        height: 110px;
+        bottom: 20px;
+      }
+
+      #player {
+        width: 35px;
+        height: 25px;
+      }
+
+      .gate {
+        bottom: 12%;
+        right: 3%;
+      }
+
+      .gate::before,
+      .gate-prev::before {
+        font-size: 24px;
+      }
+
+      .hud {
+        height: 45px;
+        font-size: 7px;
+      }
+
+      .hud-item {
+        padding: 4px 8px;
+        font-size: 6px;
+      }
+
+      .controls {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 4px;
+        padding: 6px 0;
+      }
+
+      .btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        border: 2px solid var(--black);
+      }
+
+      .intro-box {
+        max-width: 95%;
+        padding: 15px 12px;
+        max-height: 80vh;
+      }
+
+      .intro-box h1 {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      .intro-box p {
+        font-size: 9px;
+        margin-bottom: 6px;
+        line-height: 1.4;
+      }
+
+      .intro-box .close-btn {
+        font-size: 9px;
+        padding: 6px 12px;
+        margin-top: 8px;
+      }
+
+      .sound-toggle-btn {
+        bottom: 0 !important;
+        left: 60px;
       }
     }
 
@@ -776,106 +987,9 @@
         background-position: center;
       }
     }
-
-    @media (max-width: 480px) {
-      #level1 .level-info {
-        flex-direction: column;
-        gap: 8px;
-      }
-      .level-title {
-        font-size: 11px;
-        margin-bottom: 6px;
-      }
-      .portfolio-grid {
-        grid-template-columns: 3fr;
-        gap: 6px;
-        max-height: 50vh;
-      }
-
-        .portfolio-item p {
-        font-size: 10px;
-      }
-      .portfolio-item img { height: 70px; }
-      .profile-photo { width: 80px; height: 80px; }
-      .profile-name { font-size: 9px; }
-      
-      #character {
-        width: 50px;
-        height: 110px;
-        bottom: 20px;
-      }
-      
-      #player {
-        width: 35px;
-        height: 25px;
-      }
-      
-      .gate {
-        width: auto;
-        height: auto;
-        bottom: 12%;
-        right: 3%;
-      }
-      
-      .gate::before { font-size: 24px; }
-      .gate-prev::before { font-size: 24px; }
-      
-      .hud {
-        height: 45px;
-        font-size: 7px;
-      }
-      
-      .hud-item {
-        padding: 4px 8px;
-        font-size: 6px;
-        display: none;
-      }
-      
-      .controls {
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        gap: 4px;
-        padding: 6px 0;
-      }
-      
-      .btn {
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
-        border: 2px solid var(--black);
-      }
-      
-      .intro-box {
-        max-width: 95%;
-        padding: 15px 12px;
-        max-height: 80vh;
-      }
-      
-      .intro-box h1 {
-        font-size: 16px;
-        margin-bottom: 8px;
-      }
-      
-      .intro-box p {
-        font-size: 9px;
-        margin-bottom: 6px;
-        line-height: 1.4;
-      }
-      
-      .intro-box .close-btn {
-        font-size: 9px;
-        padding: 6px 12px;
-        margin-top: 8px;
-      }
-
-      .sound-toggle-btn {
-        bottom: 0px!important;
-        left: 60px;
-      }
-    }
   </style>
 </head>
+
 <body>
   <!-- MOBILE LANDSCAPE WARNING -->
   <div id="landscapeWarning">
@@ -888,7 +1002,8 @@
     <h1>🎮 SELAMAT DATANG! 🎮</h1>
     <p>Selamat datang di Portfolio Interaktif saya!</p>
     <p>Ikuti perjalanan ini untuk melihat riwayat pekerjaan, portofolio, dan pencapaian saya selama bertahun-tahun.</p>
-    <p>Gunakan tombol panah untuk bergerak ke kanan atau kiri, dan tekan SPACE untuk melompat menuju gerbang berikutnya.</p>
+    <p>Gunakan tombol panah untuk bergerak ke kanan atau kiri, dan tekan SPACE untuk melompat menuju gerbang berikutnya.
+    </p>
     <p>Setiap level bercerita tentang bagian penting dari karir saya. Semoga Anda menikmati pengalaman ini! 🚀</p>
     <button class="close-btn" onclick="closeIntroBox()">MULAI PERJALANAN</button>
   </div>
@@ -963,7 +1078,8 @@
         <div class="level-title">SKILLS</div>
         <p><strong>Specialities:</strong> Web App, Web Design</p>
         <p><strong>Skills:</strong><br>
-        Photoshop, Illustrator, HTML/CSS, JavaScript, PHP, Laravel, Vue, Nest, WordPress, Bootstrap, MySQL, PostgreSQL</p>
+          Photoshop, Illustrator, HTML/CSS, JavaScript, PHP, Laravel, Vue, Nest, WordPress, Bootstrap, MySQL, PostgreSQL
+        </p>
         <p><strong>Languages:</strong> Bahasa Indonesia, English</p>
       </div>
     </div>
@@ -975,12 +1091,12 @@
         <div class="level-title">EXPERIENCE</div>
         <p><strong>Work History:</strong></p>
         <p>• 2016-2017: Kementrian UMKM Indonesia - Front End Developer<br>
-        • 2017: PT Robby Printing - T-shirt Designer<br>
-        • 2018: PT Klaud.id - Front End Developer<br>
-        • 2018-2019: PT Primawisata - Fullstack Developer<br>
-        • 2019-2023: PT Kharisma Autokreasi - IT & Fullstack Developer<br>
-        • 2022-present: Binary Kiddo - Coding Instructor<br>
-        • 2024-present: Freelancer - Software Developer</p>
+          • 2017: PT Robby Printing - T-shirt Designer<br>
+          • 2018: PT Klaud.id - Front End Developer<br>
+          • 2018-2019: PT Primawisata - Fullstack Developer<br>
+          • 2019-2023: PT Kharisma Autokreasi - IT & Fullstack Developer<br>
+          • 2022-present: Binary Kiddo - Coding Instructor<br>
+          • 2024-present: Freelancer - Software Developer</p>
       </div>
     </div>
 
@@ -991,8 +1107,8 @@
         <div class="level-title">CONTACT</div>
         <p><strong>Let's Connect!</strong></p>
         <p>📧 EMAIL: cahyo9823@gmail.com<br>
-        📱 WHATSAPP: 0821-2518-9383<br>
-        📍 LOCATION: Tangerang, Indonesia</p>
+          📱 WHATSAPP: 0821-2518-9383<br>
+          📍 LOCATION: Tangerang, Indonesia</p>
         <p>Hobbies: Coffee, Listen Music, Play Game</p>
         <p style="margin-top: 15px;"><strong>THANKS FOR EXPLORING!</strong></p>
       </div>
@@ -1036,7 +1152,7 @@
     <button class="message-btn" onclick="nextLevel()">NEXT LEVEL</button>
   </div>
 
-  
+
 
   <script>
     // CHECK MOBILE LANDSCAPE ORIENTATION
@@ -1044,7 +1160,7 @@
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       const isPortrait = window.innerHeight > window.innerWidth;
       const warningBox = document.getElementById('landscapeWarning');
-      
+
       if (isMobile && isPortrait) {
         warningBox.classList.add('show');
         document.getElementById('gameContainer').style.display = 'none';
@@ -1069,14 +1185,14 @@
       }
     }
 
-    
+
 
     function closeIntroBox() {
       const introBox = document.getElementById('introBox');
       if (introBox) {
         introBox.classList.remove('show');
       }
-      
+
       // Play audio when journey starts
       setTimeout(() => {
         if (motorSound && isSoundEnabled) {
@@ -1091,19 +1207,78 @@
       showIntroBox();
     });
 
-    const portfolioData = [
-      { name: 'binarykiddo', img: 'assets/gambar/projek/binary.jpg', desc: 'Company Profile', link: 'https://binarykiddo.id' },
-      { name: 'AutoFrontier', img: 'assets/gambar/projek/frontier.jpg', desc: 'Company Profile', link: 'https://autofrontier.com' },
-      { name: 'Dandanoma', img: 'assets/gambar/projek/dandanoma.jpg', desc: 'Company Profile', link: 'https://dandanoma.com' },
-      { name: 'Tdspaint', img: 'assets/gambar/projek/tdspaint.jpg', desc: 'Company Profile', link: 'https://tdspaint.com' },
-      { name: 'zengoods', img: 'assets/gambar/projek/zengoods.jpg', desc: 'E-Commerce', link: 'https://zengoods.com' },
-      { name: 'parama', img: 'assets/gambar/projek/parama.jpg', desc: 'Company Profile', link: 'https://parama.com' },
-      { name: 'zencave', img: 'assets/gambar/projek/zencave.jpg', desc: 'Company Profile', link: 'https://zencave.com' },
-      { name: 'Cielocura', img: 'assets/gambar/projek/cielocura.jpg', desc: 'Company Profile', link: 'https://cielocura.com' },
-      { name: 'Barbershop', img: 'assets/gambar/projek/barbershop.jpg', desc: 'Company Profile', link: 'https://barbershop.com' },
-      { name: 'Indorekor', img: 'assets/gambar/projek/indorekor.png', desc: 'Company Profile', link: 'https://indorekor.com' },
-      { name: 'Inviguard', img: 'assets/gambar/projek/inviguard.jpg', desc: 'Company Profile', link: 'https://inviguard.com' },
-      { name: 'Jam Sembilan', img: 'assets/gambar/projek/jamsembilan.jpg', desc: 'Raw Food', link: 'https://jamsembilan.com' }
+    const portfolioData = [{
+        name: 'binarykiddo',
+        img: 'assets/gambar/projek/binary.jpg',
+        desc: 'Company Profile',
+        link: 'https://binarykiddo.id'
+      },
+      {
+        name: 'AutoFrontier',
+        img: 'assets/gambar/projek/frontier.jpg',
+        desc: 'Company Profile',
+        link: 'https://autofrontier.com'
+      },
+      {
+        name: 'Dandanoma',
+        img: 'assets/gambar/projek/dandanoma.jpg',
+        desc: 'Company Profile',
+        link: 'https://dandanoma.com'
+      },
+      {
+        name: 'Tdspaint',
+        img: 'assets/gambar/projek/tdspaint.jpg',
+        desc: 'Company Profile',
+        link: 'https://tdspaint.com'
+      },
+      {
+        name: 'zengoods',
+        img: 'assets/gambar/projek/zengoods.jpg',
+        desc: 'E-Commerce',
+        link: 'https://zengoods.com'
+      },
+      {
+        name: 'parama',
+        img: 'assets/gambar/projek/parama.jpg',
+        desc: 'Company Profile',
+        link: 'https://parama.com'
+      },
+      {
+        name: 'zencave',
+        img: 'assets/gambar/projek/zencave.jpg',
+        desc: 'Company Profile',
+        link: 'https://zencave.com'
+      },
+      {
+        name: 'Cielocura',
+        img: 'assets/gambar/projek/cielocura.jpg',
+        desc: 'Company Profile',
+        link: 'https://cielocura.com'
+      },
+      {
+        name: 'Barbershop',
+        img: 'assets/gambar/projek/barbershop.jpg',
+        desc: 'Company Profile',
+        link: 'https://barbershop.com'
+      },
+      {
+        name: 'Indorekor',
+        img: 'assets/gambar/projek/indorekor.png',
+        desc: 'Company Profile',
+        link: 'https://indorekor.com'
+      },
+      {
+        name: 'Inviguard',
+        img: 'assets/gambar/projek/inviguard.jpg',
+        desc: 'Company Profile',
+        link: 'https://inviguard.com'
+      },
+      {
+        name: 'Jam Sembilan',
+        img: 'assets/gambar/projek/jamsembilan.jpg',
+        desc: 'Raw Food',
+        link: 'https://jamsembilan.com'
+      }
     ];
 
     const gameState = {
@@ -1133,7 +1308,7 @@
     // Audio elements
     const motorSound = document.getElementById('motorSound');
     let isSoundEnabled = true;
-    
+
     if (motorSound) {
       motorSound.volume = 0.3; // Set volume to 30%
       motorSound.preload = 'auto';
@@ -1164,10 +1339,26 @@
 
     // Portfolio level mapping
     const portfolioLevels = {
-      2: { gridId: 'portfolioGrid2', start: 0, end: 3 },
-      2.1: { gridId: 'portfolioGrid2-1', start: 3, end: 6 },
-      2.2: { gridId: 'portfolioGrid2-2', start: 6, end: 9 },
-      2.3: { gridId: 'portfolioGrid2-3', start: 9, end: 12 }
+      2: {
+        gridId: 'portfolioGrid2',
+        start: 0,
+        end: 3
+      },
+      2.1: {
+        gridId: 'portfolioGrid2-1',
+        start: 3,
+        end: 6
+      },
+      2.2: {
+        gridId: 'portfolioGrid2-2',
+        start: 6,
+        end: 9
+      },
+      2.3: {
+        gridId: 'portfolioGrid2-3',
+        start: 9,
+        end: 12
+      }
     };
 
     function init() {
@@ -1231,21 +1422,21 @@
       // LEFT BUTTON
       const leftBtn = document.getElementById('leftBtn');
       if (leftBtn) {
-        leftBtn.onmousedown = () => { 
+        leftBtn.onmousedown = () => {
           keys['ArrowLeft'] = true;
           console.log('🖱️ LEFT BUTTON MOUSE DOWN');
         };
-        leftBtn.onmouseup = () => { 
+        leftBtn.onmouseup = () => {
           keys['ArrowLeft'] = false;
           console.log('🖱️ LEFT BUTTON MOUSE UP');
         };
-        leftBtn.ontouchstart = (e) => { 
-          e.preventDefault(); 
+        leftBtn.ontouchstart = (e) => {
+          e.preventDefault();
           keys['ArrowLeft'] = true;
           console.log('👆 LEFT BUTTON TOUCH START');
         };
-        leftBtn.ontouchend = (e) => { 
-          e.preventDefault(); 
+        leftBtn.ontouchend = (e) => {
+          e.preventDefault();
           keys['ArrowLeft'] = false;
           console.log('👆 LEFT BUTTON TOUCH END');
         };
@@ -1254,21 +1445,21 @@
       // RIGHT BUTTON
       const rightBtn = document.getElementById('rightBtn');
       if (rightBtn) {
-        rightBtn.onmousedown = () => { 
+        rightBtn.onmousedown = () => {
           keys['ArrowRight'] = true;
           console.log('🖱️ RIGHT BUTTON MOUSE DOWN');
         };
-        rightBtn.onmouseup = () => { 
+        rightBtn.onmouseup = () => {
           keys['ArrowRight'] = false;
           console.log('🖱️ RIGHT BUTTON MOUSE UP');
         };
-        rightBtn.ontouchstart = (e) => { 
-          e.preventDefault(); 
+        rightBtn.ontouchstart = (e) => {
+          e.preventDefault();
           keys['ArrowRight'] = true;
           console.log('👆 RIGHT BUTTON TOUCH START');
         };
-        rightBtn.ontouchend = (e) => { 
-          e.preventDefault(); 
+        rightBtn.ontouchend = (e) => {
+          e.preventDefault();
           keys['ArrowRight'] = false;
           console.log('👆 RIGHT BUTTON TOUCH END');
         };
@@ -1291,17 +1482,17 @@
         document.body.appendChild(jumpBtn);
         console.log('✅ Jump button created');
       }
-      
-      jumpBtn.onmousedown = () => { 
+
+      jumpBtn.onmousedown = () => {
         performJump();
         console.log('🖱️ JUMP BUTTON MOUSE DOWN');
       };
-      jumpBtn.ontouchstart = (e) => { 
-        e.preventDefault(); 
+      jumpBtn.ontouchstart = (e) => {
+        e.preventDefault();
         performJump();
         console.log('👆 JUMP BUTTON TOUCH START');
       };
-      
+
       console.log('✅ Event listeners setup complete');
     }
 
@@ -1336,14 +1527,16 @@
     function updatePlayer() {
       // Log current key states
       if (keys['ArrowLeft'] || keys['ArrowRight']) {
-        console.log('🎮 Movement - Left:', keys['ArrowLeft'], 'Right:', keys['ArrowRight'], 'PlayerX:', Math.round(gameState.playerX));
+        console.log('🎮 Movement - Left:', keys['ArrowLeft'], 'Right:', keys['ArrowRight'], 'PlayerX:', Math.round(
+          gameState.playerX));
       }
-      
+
       if (keys['ArrowLeft']) {
         gameState.playerX = Math.max(10, gameState.playerX - PLAYER_SPEED);
       }
       if (keys['ArrowRight']) {
-        gameState.playerX = Math.min(gameState.gameWidth - gameState.playerWidth - 10, gameState.playerX + PLAYER_SPEED);
+        gameState.playerX = Math.min(gameState.gameWidth - gameState.playerWidth - 10, gameState.playerX +
+        PLAYER_SPEED);
       }
 
       // Apply gravity
@@ -1365,6 +1558,7 @@
       checkGateReached();
     }
     let collisionCooldown = false;
+
     function checkGateReached() {
       const gateRect = gate.getBoundingClientRect();
       const gatePrevRect = gatePrev.getBoundingClientRect();
@@ -1372,8 +1566,18 @@
 
       // Debug: log positions periodically (every 30 frames)
       if (Math.random() < 0.05) {
-        console.log('🎯 Character:', {x: Math.round(characterRect.left), y: Math.round(characterRect.top), w: Math.round(characterRect.width), h: Math.round(characterRect.height)});
-        console.log('🚪 Gate:', {x: Math.round(gateRect.left), y: Math.round(gateRect.top), w: Math.round(gateRect.width), h: Math.round(gateRect.height)});
+        console.log('🎯 Character:', {
+          x: Math.round(characterRect.left),
+          y: Math.round(characterRect.top),
+          w: Math.round(characterRect.width),
+          h: Math.round(characterRect.height)
+        });
+        console.log('🚪 Gate:', {
+          x: Math.round(gateRect.left),
+          y: Math.round(gateRect.top),
+          w: Math.round(gateRect.width),
+          h: Math.round(gateRect.height)
+        });
       }
 
       // Check next gate
@@ -1560,11 +1764,11 @@
       // Pastikan karakter visible
       character.style.display = 'block';
       character.style.position = 'fixed';
-      
+
       // Start game loop
       showLevelSection(1);
       init();
-      
+
       // Check jump button after init
       setTimeout(() => {
         const jumpBtn = document.getElementById('jumpBtn');
@@ -1575,4 +1779,5 @@
     });
   </script>
 </body>
+
 </html>
