@@ -9,6 +9,10 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <style>
     :root {
       --soft-brown: #f5e8c7;
@@ -69,6 +73,130 @@
         transform: translate(-5px, 5px) rotate(-1deg);
       }
     }
+
+
+    .portfolio-section {
+      padding: 80px 0;
+    }
+
+    .portfolio-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 3.5rem;
+      color: var(--deep-brown);
+      text-align: center;
+      margin-bottom: 4rem;
+      text-shadow: 4px 4px 0 rgba(212, 165, 116, 0.3);
+    }
+
+    .portfolio-carousel .item {
+      background: rgba(255, 255, 255, 0.9);
+      border: 4px solid var(--deep-brown);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--pixel-shadow);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 10px;
+    }
+
+    .portfolio-carousel .item:hover {
+      transform: translateY(-15px) rotate(1deg);
+      box-shadow: var(--pixel-glow), 12px 12px 0 #d4a574;
+    }
+
+    .portfolio-carousel .post-image {
+      height: 200px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .portfolio-carousel .post-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .portfolio-carousel .item:hover .post-image img {
+      transform: scale(1.1);
+    }
+
+    .portfolio-carousel .post-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portfolio-carousel .post-meta {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .portfolio-carousel .post-meta li {
+      background: rgba(212, 165, 116, 0.2);
+      padding: 4px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .portfolio-carousel .post-content h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .portfolio-carousel .post-content h4 a {
+      color: var(--deep-brown);
+      text-decoration: none;
+    }
+
+    .portfolio-carousel .post-content h4 a:hover {
+      color: var(--muted-gold);
+    }
+
+    .owl-dots {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .owl-dot {
+      display: inline-block;
+      margin: 0 8px;
+    }
+
+    .owl-dot span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(139, 115, 85, 0.3);
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .owl-dot.active span {
+      background: var(--deep-brown);
+      transform: scale(1.2);
+      box-shadow: var(--pixel-glow);
+    }
+
+    /* Responsive untuk carousel */
+    @media (max-width: 768px) {
+      .portfolio-carousel .item {
+        height: 380px;
+        margin: 0 5px;
+      }
+
+      .portfolio-carousel .post-image {
+        height: 180px;
+      }
+    }
+
 
     /* Hamburger Menu */
     .hamburger {
@@ -210,7 +338,6 @@
       background: url('https://academy.alterra.id/blog/wp-content/uploads/2023/01/Screen-Shot-2023-01-27-at-15.56.19.png') center/cover no-repeat;
       background-size: cover;
       filter: sepia(0.3) brightness(0.8) blur(0.5px);
-      border-radius: 25px;
       box-shadow: inset 0 0 50px rgba(139, 115, 85, 0.3);
     }
 
@@ -479,7 +606,7 @@
     /* Responsive */
     @media (min-width: 768px) {
       .content-wrapper {
-        padding: 140px 40px 60px;
+        padding: 0;
       }
 
       .resume-card {
@@ -598,87 +725,87 @@
     }
 
     /* --- Bottom Navigation Bar (Mobile Only) --- */
-.bottom-nav {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(10, 14, 23, 0.9);
-  backdrop-filter: blur(10px);
-  border-top: 2px solid var(--neon-blue);
-  z-index: 1000;
-}
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(10, 14, 23, 0.9);
+      backdrop-filter: blur(10px);
+      border-top: 2px solid var(--neon-blue);
+      z-index: 1000;
+    }
 
-@media (max-width: 768px) {
-  .bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 12px 0;
-  }
+    @media (max-width: 768px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 0;
+      }
 
-  .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 0.75rem;
-    transition: all 0.2s ease;
-  }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 0.75rem;
+        transition: all 0.2s ease;
+      }
 
-  .nav-item i {
-    font-size: 1.5rem;
-    margin-bottom: 4px;
-    color: var(--neon-blue);
-  }
+      .nav-item i {
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+        color: var(--neon-blue);
+      }
 
-  .nav-item:hover,
-  .nav-item.active {
-    color: var(--neon-blue);
-    transform: translateY(-3px);
-  }
+      .nav-item:hover,
+      .nav-item.active {
+        color: var(--neon-blue);
+        transform: translateY(-3px);
+      }
 
-  /* Sembunyikan hamburger di mobile */
-  .hamburger {
-    display: none;
-  }
+      /* Sembunyikan hamburger di mobile */
+      .hamburger {
+        display: none;
+      }
 
-  /* Hero section full viewport tanpa padding atas */
-  .content-wrapper {
-    padding: 0;
-  }
+      /* Hero section full viewport tanpa padding atas */
+      .content-wrapper {
+        padding: 0;
+      }
 
-  #start {
-    min-height: 100vh;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0px;
-  }
+      #start {
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0px;
+      }
 
-  .hero-content {
-    padding: 0 15px;
-    width: 100%;
-    max-width: none;
-  }
+      .hero-content {
+        padding: 0 15px;
+        width: 100%;
+        max-width: none;
+      }
 
-  .hero-photo img {
-    width: 220px;
-    height: 290px;
-  }
+      .hero-photo img {
+        width: 220px;
+        height: 290px;
+      }
 
-  .hero-text h1 {
-    font-size: clamp(1.8rem, 8vw, 2.8rem);
-  }
+      .hero-text h1 {
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+      }
 
-  .lead {
-    font-size: clamp(1rem, 5vw, 1.3rem);
-  }
-}
+      .lead {
+        font-size: clamp(1rem, 5vw, 1.3rem);
+      }
+    }
   </style>
 </head>
 
@@ -704,14 +831,13 @@
   <div class="content-wrapper">
     <!-- Section - Start -->
     <!-- Section - Start -->
-<section id="start" class="section fullheight fade-in">
+    <section id="start" class="section fullheight fade-in">
       <div class="hero-content" style="display: flex; gap: 2.5rem; align-items: center; width: 80%;">
         <!-- LEFT: Pixel Art Photo -->
         <div class="hero-photo" style="flex: 0 0 auto; text-align: center;">
-          <img src="assets/gambar/1000060301.jpg" alt="Cahyo Adi Nugroho"
-            style="
+          <img src="assets/gambar/1000060301.jpg" alt="Cahyo Adi Nugroho" style="
               width: 100%;
-              height: 280px;
+              height: 350px;
               image-rendering: pixelated;
               image-rendering: -webkit-optimize-contrast;
               border: 4px solid #00f7ff;
@@ -756,7 +882,7 @@
           </p>
         </div>
       </div>
-</section>
+    </section>
 
     <!-- Section - Resume -->
     <section id="resume" class="section fade-in">
@@ -929,169 +1055,244 @@
     </section>
 
     <!-- Section - Portfolio -->
-    <section id="portofolio" class="section fade-in">
+    <!-- Section - Portfolio OWL CAROUSEL -->
+    <section id="portofolio" class="section fade-in portfolio-section">
       <div class="container-custom">
-        <h3 class="text-center mb-80"
-          style="font-family: 'Orbitron', monospace; font-size: 3.5rem; color: var(--deep-brown); margin-bottom: 5rem; text-shadow: 4px 4px 0 rgba(212, 165, 116, 0.3);">
-          Portfolio</h3>
+        <h3 class="portfolio-title">Portfolio</h3>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/binary.jpg" alt="BinaryKiddo"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=BinaryKiddo'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>01 January 2024</li>
-              <li>Company Profile</li>
-            </ul>
-            <h4><a target="_blank" href="https://www.binarykiddo.id/">binarykiddo</a></h4>
-            <p>website Project company profile.</p>
+        <!-- OWL CAROUSEL CONTAINER -->
+        <div class="owl-carousel owl-theme portfolio-carousel">
+          <!-- Card 1 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/ERPConstruction.png" alt="erp Konstruksi
+                onerror=" this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=BinaryKiddo'">
+            </div>
+            <div class=" post-content">
+              <ul class="post-meta">
+                <li>ERP Konstruksi</li>
+              </ul>
+              <h4><a href="h#" target="_blank">ERP Construction</a></h4>
+              <p>Website ERP untuk perusahaan Konstruksi.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/frontier.jpg" alt="AutoFrontier"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=AutoFrontier'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>25 December 2023</li>
-              <li>Company Profile</li>
-            </ul>
-            <h4><a target="_blank" href="https://www.autofrontier.co.id/">AutoFrontier</a></h4>
-            <p>website Project company profile.</p>
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/eyearbook.png" alt="Eyearbookerpsystem"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=BinaryKiddo'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Eyearbook-system</li>
+              </ul>
+              <h4><a href="#" target="_blank">Eyearbook</a></h4>
+              <p>Website Eyearbook-system untuk Sekolah.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/indorekor.png" alt="Indorekor"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=Indorekor'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>24 December 2018</li>
-              <li>Company Profile</li>
-            </ul>
-            <h4><a target="_blank" href="https://www.indorekor.com/">Indorekor</a></h4>
-            <p>website Project company profile.</p>
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/erpsystem.png" alt="erpsystem"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=BinaryKiddo'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>ERP</li>
+              </ul>
+              <h4><a href="#" target="_blank">ERP System</a></h4>
+              <p>Website ERP untuk perusahaan konveksi.</p>
+            </div>
           </div>
-        </article>
+          
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/binary.jpg" alt="BinaryKiddo"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=BinaryKiddo'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4><a href="#" target="_blank">BinaryKiddo</a></h4>
+              <p>Website company profile untuk Binary Kiddo.</p>
+            </div>
+          </div>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/inviguard.jpg" alt="Inviguard"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=Inviguard'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>18 October 2021</li>
-              <li>Company Profile</li>
-            </ul>
-            <h4><a target="_blank" href="https://www.inviguard.id/">Inviguard</a></h4>
-            <p>website Project company profile.</p>
+          <!-- Card 2 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/frontier.jpg" alt="AutoFrontier"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=AutoFrontier'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4><a href="https://www.autofrontier.co.id/" target="_blank">AutoFrontier</a></h4>
+              <p>Website company profile profesional.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/jamsembilan.jpg" alt="Jam Sembilan"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=Jam+Sembilan'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>Company Profile</li>
-            </ul>
-            <h4>Jam Sembilan Raw Food</h4>
-            <p>website Project Company Profile.</p>
+          <!-- Card 3 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/indorekor.png" alt="Indorekor"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Indorekor'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4><a href="https://www.indorekor.com/" target="_blank">Indorekor</a></h4>
+              <p>Website company profile interior design.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/reneehomewear.JPG" alt="Renee Homewear"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=Renee+Homewear'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>Company Profile</li>
-            </ul>
-            <h4>reneehomewear</h4>
-            <p>website Project company profile.</p>
+          <!-- Card 4 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/inviguard.jpg" alt="Inviguard"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Inviguard'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4><a href="https://www.inviguard.id/" target="_blank">Inviguard</a></h4>
+              <p>Website company profile security system.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/garansi.png" alt="Warranty System"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=Warranty+System'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>warranty system</li>
-            </ul>
-            <h4>warranty system</h4>
-            <p>website Project warranty system.</p>
+          <!-- Card 5 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/jamsembilan.jpg" alt="Jam Sembilan"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Jam+Sembilan'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4>Jam Sembilan Raw Food</h4>
+              <p>Website company profile restoran.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/pos1.png" alt="POS System"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=POS+System'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>POS System</li>
-            </ul>
-            <h4>POS System</h4>
-            <p>website Project POS System.</p>
+          <!-- Card 6 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/reneehomewear.JPG" alt="Renee Homewear"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Renee+Homewear'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4>Renee Homewear</h4>
+              <p>Website e-commerce fashion.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/fluxury.png" alt="AutoFluxury"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=AutoFluxury'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>Company Profile</li>
-            </ul>
-            <h4>AutoFluxury</h4>
-            <p>website Project Company Profile.</p>
+          <!-- Card 7 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/garansi.png" alt="Warranty System"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Warranty'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Warranty System</li>
+              </ul>
+              <h4>Warranty System</h4>
+              <p>Sistem manajemen garansi online.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/lemisamu.jpg" alt="Lemisamu"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=Lemisamu'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>Company Profile</li>
-            </ul>
-            <h4>Lemisamu</h4>
-            <p>website Project Company Profile.</p>
+          <!-- Card 8 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/pos1.png" alt="POS System"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=POS'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>POS System</li>
+              </ul>
+              <h4>POS System</h4>
+              <p>Sistem Point of Sale lengkap.</p>
+            </div>
           </div>
-        </article>
 
-        <article class="post item">
-          <div class="post-image"><img src="assets/gambar/projek/kitabasodara.png" alt="Kitabasodara"
-              onerror="this.src='https://via.placeholder.com/400x250/f5e8c7/8b7355?text=Kitabasodara'"></div>
-          <div class="post-content">
-            <ul class="post-meta">
-              <li>Company Profile</li>
-            </ul>
-            <h4>Kitabasodara</h4>
-            <p>website Project Company Profile.</p>
+          <!-- Card 9 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/fluxury.png" alt="AutoFluxury"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Fluxury'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4>AutoFluxury</h4>
+              <p>Website company profile otomotif.</p>
+            </div>
           </div>
-        </article>
+
+          <!-- Card 10 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/lemisamu.jpg" alt="Lemisamu"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Lemisamu'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4>Lemisamu</h4>
+              <p>Website company profile lokal.</p>
+            </div>
+          </div>
+
+          <!-- Card 11 -->
+          <div class="post item">
+            <div class="post-image">
+              <img src="assets/gambar/projek/kitabasodara.png" alt="Kitabasodara"
+                onerror="this.src='https://via.placeholder.com/400x200/f5e8c7/8b7355?text=Kitab'">
+            </div>
+            <div class="post-content">
+              <ul class="post-meta">
+                <li>Company Profile</li>
+              </ul>
+              <h4>Kitabasodara</h4>
+              <p>Website company profile edukasi.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+
 
     <!-- Section - Contact -->
     <section id="contact" class="section fade-in">
       <div class="container-custom">
         <div class="contact-box">
+          <h3 class="title">Contact Me</h3>
           <div
             style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 2fr)); gap: 3rem; margin-top: 2rem;">
             <div class="feature">
               <div class="icon"><i class="fas fa-envelope" style="font-size: 3.5rem;"></i></div>
-              <a
-                href="mailto:cahyo9823@gmail.com?subject=pengen%20bikin%20website&body=hallo%20mas%20perkenalkan%20saya%20...%20mau%20bikin%20website%20..." style="font-size: .9rem;">cahyo9823@gmail.com</a>
+              <a href="mailto:cahyo9823@gmail.com?subject=pengen%20bikin%20website&body=hallo%20mas%20perkenalkan%20saya%20...%20mau%20bikin%20website%20..."
+                style="font-size: 1rem;">cahyo9823@gmail.com</a>
             </div>
             <div class="feature">
               <div class="icon"><i class="fab fa-whatsapp" style="font-size: 3.5rem;"></i></div>
-              <a
-                href="https://api.whatsapp.com/send?phone=6287780319183&text=Hallo%20salam%20kenal%20saya%20ingin%20membuat%20website%20..." style="font-size: .9rem;">0877-8031-9183</a>
+              <a href="https://api.whatsapp.com/send?phone=6282125189383&text=Hallo%20salam%20kenal%20saya%20ingin%20membuat%20website%20..."
+                style="font-size: 1rem;">0821-2518-9383</a>
             </div>
             <div class="feature">
               <div class="icon"><i class="fas fa-map-marker-alt" style="font-size: 3.5rem;"></i></div>
-              <a href="#" style="font-size: .9rem;">
+              <a href="#" style="font-size: 1rem;">
                 Tangerang, Indonesia</a>
             </div>
           </div>
@@ -1101,73 +1302,134 @@
   </div>
 
   <!-- Bottom Navigation (Mobile Only) -->
-<nav class="bottom-nav" id="bottomNav">
-  <a href="#start" class="nav-item active" data-section="start">
-    <i class="fas fa-home"></i>
-    <span>Start</span>
-  </a>
-  <a href="#resume" class="nav-item" data-section="resume">
-    <i class="fas fa-user"></i>
-    <span>Resume</span>
-  </a>
-  <a href="#portofolio" class="nav-item" data-section="portofolio">
-    <i class="fas fa-briefcase"></i>
-    <span>Portfolio</span>
-  </a>
-  <a href="#contact" class="nav-item" data-section="contact">
-    <i class="fas fa-envelope"></i>
-    <span>Contact</span>
-  </a>
-</nav>
+  <nav class="bottom-nav" id="bottomNav">
+    <a href="#start" class="nav-item active" data-section="start">
+      <i class="fas fa-home"></i>
+      <span>Start</span>
+    </a>
+    <a href="#resume" class="nav-item" data-section="resume">
+      <i class="fas fa-user"></i>
+      <span>Resume</span>
+    </a>
+    <a href="#portofolio" class="nav-item" data-section="portofolio">
+      <i class="fas fa-briefcase"></i>
+      <span>Portfolio</span>
+    </a>
+    <a href="#contact" class="nav-item" data-section="contact">
+      <i class="fas fa-envelope"></i>
+      <span>Contact</span>
+    </a>
+  </nav>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
   <script>
-    // Hamburger Menu Toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
-
-    // Close menu when clicking on link
-    document.querySelectorAll('.menu-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      });
-    });
-
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+    $(document).ready(function () {
+      // OWL CAROUSEL INIT - DESKTOP 5 | TABLET 3 | MOBILE 3
+      // RUNNING TEXT EFFECT - INFINITE LOOP PELAN
+      $('.portfolio-carousel').owlCarousel({
+        loop: true, // Infinite loop
+        margin: 25, // Jarak antar card
+        nav: false, // Hide arrows
+        dots: true, // Hide dots (opsional)
+        autoplay: true, // Auto play ON
+        autoplayTimeout: 2000, // 8 detik (PELAN)
+        autoplayHoverPause: true, // Pause saat hover
+        autoplaySpeed: 2000, // 2 detik transisi (SMOOTH)
+        smartSpeed: 4000, // 1.5 detik animasi
+        slideBy: 1, // Geser 1 card
+        responsive: {
+          0: {
+            items: 1.5
+          }, // Mobile: 1.5 card visible
+          480: {
+            items: 2.2
+          }, // 2.2 card visible
+          768: {
+            items: 3.3
+          }, // Tablet: 3.3 card
+          1024: {
+            items: 2.5
+          }, // 4.5 card
+          1200: {
+            items: 2.8
+          } // Desktop: 5.8 card
+        },
+        // CRUCIAL untuk running text smooth
+        rewind: false,
+        mouseDrag: true,
+        touchDrag: true,
+        pullDrag: false,
+        freeDrag: true,
+        // Custom events untuk smoother
+        onInitialize: function () {
+          $('.portfolio-carousel').trigger('stop.owl.autoplay');
+          setTimeout(() => $('.portfolio-carousel').trigger('play.owl.autoplay'), 100);
         }
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
+      });
+      // Hamburger Menu Toggle
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
+        });
+      }
+
+      // Close menu & smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+
+          // Close mobile menu
+          if (hamburger) hamburger.classList.remove('active');
+          if (mobileMenu) mobileMenu.classList.remove('active');
+
+          // Update bottom nav
+          document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+          const sectionId = this.getAttribute('href').substring(1);
+          const activeNav = document.querySelector(`[data-section="${sectionId}"]`);
+          if (activeNav) activeNav.classList.add('active');
+        });
+      });
+
+      // Scroll animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      });
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Bottom nav active on scroll
+      window.addEventListener('scroll', () => {
+        const sections = ['start', 'resume', 'portofolio', 'contact'];
+        const scrollPos = window.scrollY + 200;
+
+        sections.forEach(section => {
+          const el = document.getElementById(section);
+          if (el && el.offsetTop <= scrollPos && scrollPos < el.offsetTop + el.offsetHeight) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            const activeNav = document.querySelector(`[data-section="${section}"]`);
+            if (activeNav) activeNav.classList.add('active');
+          }
+        });
       });
     });
-
-    // Scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    document.querySelectorAll('.fade-in').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Parallax effect removed since background is now on #start directly
   </script>
 </body>
 
