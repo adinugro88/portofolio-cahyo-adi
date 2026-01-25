@@ -602,11 +602,21 @@
       font-size: 1.3rem;
       font-weight: 500;
     }
+    
+    .boxspecial {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
 
     /* Responsive */
     @media (min-width: 768px) {
       .content-wrapper {
         padding: 0;
+      }
+
+      .boxspecial {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       }
 
       .resume-card {
@@ -893,7 +903,7 @@
           <div class="masonry-item">
             <div class="resume-card">
               <h3 class="title">My Specialities</h3>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;@media (max-width: 468px) { grid-template-columns:1fr; }">
+              <div class="boxspecial" style="@media (max-width: 468px) { grid-template-columns:1fr; }">
                 <div style="text-align: center;">
                   <div
                     style="font-size: 4rem; color: var(--deep-brown); margin-bottom: 1rem; text-shadow: 4px 4px 0 rgba(212, 165, 116, 0.3);">
