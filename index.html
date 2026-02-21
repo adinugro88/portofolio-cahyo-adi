@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     :root {
       --soft-brown: #1a1a2e;
@@ -41,37 +42,18 @@
       overflow-x: hidden;
     }
 
-    /* Pixel Art Background */
-    body::before {
-      content: '';
+    /* Wave Background Container */
+    #wave-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image:
-        radial-gradient(circle at 20% 80%, rgba(224, 224, 224, 0.08) 1px, transparent 1px),
-        radial-gradient(circle at 80% 20%, rgba(150, 150, 150, 0.06) 1px, transparent 1px),
-        radial-gradient(circle at 40% 40%, rgba(200, 200, 200, 0.05) 1px, transparent 1px);
-      background-size: 50px 50px, 80px 80px, 100px 100px;
       z-index: -1;
-      animation: pixelFloat 20s ease-in-out infinite;
     }
 
-    @keyframes pixelFloat {
-
-      0%,
-      100% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-
-      33% {
-        transform: translate(10px, -10px) rotate(1deg);
-      }
-
-      66% {
-        transform: translate(-5px, 5px) rotate(-1deg);
-      }
+    canvas {
+      display: block;
     }
 
 
@@ -164,6 +146,7 @@
     .owl-dots {
       text-align: center;
       margin-top: 2rem;
+      display: none;
     }
 
     .owl-dot {
@@ -186,8 +169,81 @@
       box-shadow: var(--pixel-glow);
     }
 
+    /* Owl Navigation Buttons (Arrows) */
+    .owl-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .owl-prev,
+    .owl-next {
+      pointer-events: all;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: rgba(102, 102, 102, 0.3);
+      border: 2px solid #606070;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e8e8e8;
+      font-size: 24px;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .owl-prev {
+      left: 20px;
+    }
+
+    .owl-next {
+      right: 20px;
+    }
+
+    .owl-prev:hover,
+    .owl-next:hover {
+      background: rgba(102, 102, 102, 0.6);
+      border-color: #c8c8c8;
+      color: #c8c8c8;
+      transform: scale(1.1);
+    }
+
+    .owl-prev::before {
+      content: "❮";
+    }
+
+    .owl-next::before {
+      content: "❯";
+    }
+
     /* Responsive untuk carousel */
     @media (max-width: 768px) {
+      .owl-prev,
+      .owl-next {
+        display: none;
+      }
+
+      .owl-dots {
+        display: block;
+      }
+
+      .owl-dot {
+        margin: 0 4px;
+      }
+
+      .owl-dot span {
+        width: 10px;
+        height: 10px;
+      }
+
       .portfolio-carousel .item {
         height: 380px;
         margin: 0 5px;
@@ -715,29 +771,13 @@
 
     /* Professional Dark Mode Theme */
     #start {
-      background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 50%, #252535 100%) !important;
+      background: transparent !important;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
-    }
-
-    #start::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        radial-gradient(circle at 20% 80%, rgba(96, 96, 112, 0.08) 1px, transparent 1px),
-        radial-gradient(circle at 80% 20%, rgba(96, 96, 112, 0.06) 1px, transparent 1px),
-        radial-gradient(circle at 40% 40%, rgba(96, 96, 112, 0.05) 1px, transparent 1px);
-      background-size: 50px 50px, 80px 80px, 100px 100px;
-      animation: pixelFloat 20s ease-in-out infinite;
-      z-index: 0;
     }
 
     @keyframes pixelFloat {
@@ -886,12 +926,14 @@
     </div>
   </nav>
 
+  <!-- Wave Background Canvas -->
+  <div id="wave-container"></div>
+
   <!-- Content Wrapper -->
   <div class="content-wrapper">
     <!-- Section - Start -->
-    <!-- Section - Start -->
     <section id="start" class="section fullheight fade-in">
-      <div class="hero-content" style="display: flex; gap: 2.5rem; align-items: center; width: 80%;">
+      <div class="hero-content" style="display: flex; gap: 2.5rem; align-items: center; width: 90%; max-width: 1000px;">
         <!-- LEFT: Pixel Art Photo -->
         <div class="hero-photo" style="flex: 0 0 auto; text-align: center;">
           <img src="assets/gambar/1000060301.jpg" alt="Cahyo Adi Nugroho" style="
@@ -906,8 +948,8 @@
             onerror="this.src='https://via.placeholder.com/180x180/0b1a2d/00f7ff?text=CA'; this.style.imageRendering='pixelated';">
         </div>
 
-        <!-- RIGHT: Futuristic Description -->
-        <div class="hero-text" style="flex: 1; text-align: left;">
+        <!-- RIGHT: Futuristic Description Card -->
+        <div class="hero-text" style="flex: 1; text-align: left; background: rgba(26, 26, 46, 0.85); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 16px; border: 2px solid #606070; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
           <h1 class="text-lg" style="
             font-family: 'Orbitron', monospace;
             font-size: clamp(2rem, 4.5vw, 3.2rem);
@@ -917,7 +959,7 @@
             margin-bottom: 1rem;
             letter-spacing: 1px;
           ">
-            Hi! I'm<br><span >Cahyo Adi Nugroho</span>
+            Hi! I'm<br><span>Cahyo Adi Nugroho</span>
           </h1>
           <p class="lead" style="
             font-size: clamp(1.1rem, 3.5vw, 1.4rem);
@@ -931,10 +973,10 @@
             font-size: clamp(0.95rem, 3vw, 1.2rem);
             line-height: 1.7;
             color: #d0d0d0;
-            background: rgba(64, 64, 80, 0.2);
+            background: rgba(96, 96, 112, 0.2);
             padding: 1rem;
             border-radius: 8px;
-            border-left: 3px solid #606070;
+            border-left: 3px solid #c8c8c8;
           ">
             Passionate Full-Stack Developer with 7 Years of Industry Experience.
             I am an IT Support Supervisor and Full-Stack Developer serving as a Coding Instructor.
@@ -1487,6 +1529,106 @@
             if (activeNav) activeNav.classList.add('active');
           }
         });
+      });
+
+      // Initialize Dot Grid Wave Background
+      const container = document.getElementById('wave-container');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x0a0a0f, 0);
+      container.appendChild(renderer.domElement);
+      
+      camera.position.z = 30;
+      
+      // Dot Grid Wave
+      const gridCountX = 50;
+      const gridCountZ = 50;
+      const spacing = 1.5;
+      const totalPoints = gridCountX * gridCountZ;
+      
+      const positions = new Float32Array(totalPoints * 3);
+      const geometry = new THREE.BufferGeometry();
+      
+      // Initial positions
+      for (let i = 0; i < gridCountX; i++) {
+        for (let j = 0; j < gridCountZ; j++) {
+          const index = (i * gridCountZ + j) * 3;
+          positions[index] = (i - gridCountX / 2) * spacing;     // x
+          positions[index + 1] = 0;                               // y
+          positions[index + 2] = (j - gridCountZ / 2) * spacing; // z
+        }
+      }
+      
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      
+      const material = new THREE.PointsMaterial({
+        color: 0x00d4ff,
+        size: 0.12,
+        transparent: true,
+        opacity: 0.8
+      });
+      
+      const dots = new THREE.Points(geometry, material);
+      dots.position.y = -5;
+      dots.rotation.x = 0.2;
+      scene.add(dots);
+      
+      // Mouse interaction
+      let mouseX = 0;
+      let mouseY = 0;
+      const windowHalfX = window.innerWidth / 2;
+      const windowHalfY = window.innerHeight / 2;
+      
+      document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX - windowHalfX);
+        mouseY = (event.clientY - windowHalfY);
+      });
+      
+      let time = 0;
+      
+      // Animation loop
+      function animateWave() {
+        requestAnimationFrame(animateWave);
+        
+        time += 0.015;
+        
+        // Wave Animation
+        const posAttr = dots.geometry.attributes.position;
+        for (let i = 0; i < gridCountX; i++) {
+          for (let j = 0; j < gridCountZ; j++) {
+            const index = (i * gridCountZ + j) * 3;
+            
+            // Multi-layered sine waves for organic motion
+            const x = posAttr.array[index];
+            const z = posAttr.array[index + 2];
+            
+            const wave1 = Math.sin(x * 0.15 + time) * 1.5;
+            const wave2 = Math.sin(z * 0.15 + time * 0.8) * 1.5;
+            const wave3 = Math.sin((x + z) * 0.05 + time * 0.5) * 1.0;
+            
+            posAttr.array[index + 1] = wave1 + wave2 + wave3;
+          }
+        }
+        posAttr.needsUpdate = true;
+        
+        // Interactive tilting
+        dots.rotation.z = mouseX * 0.00005;
+        dots.rotation.x = 0.2 + (mouseY * 0.00005);
+        
+        renderer.render(scene, camera);
+      }
+      
+      animateWave();
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
       });
     });
   </script>
