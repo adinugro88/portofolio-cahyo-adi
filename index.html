@@ -321,6 +321,16 @@
       position: relative;
     }
 
+    #resume {
+      padding: 100px 20px;
+    }
+
+    #resume .container-custom {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
     .container-custom {
       max-width: 1200px;
       margin: 0 auto;
@@ -392,6 +402,7 @@
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
+      width: 100%;
     }
 
     .resume-card::before {
@@ -413,19 +424,33 @@
     }
 
     .resume-card:hover {
-      transform: translateY(-15px) rotate(2deg);
+      transform: translateY(-10px);
       box-shadow: var(--pixel-glow), 12px 12px 0 #d4a574, 16px 16px 0 #b8945f;
       border-color: var(--muted-gold);
     }
 
     .title {
       font-family: 'Orbitron', monospace;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
       color: var(--deep-brown);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       text-align: center;
       text-shadow: 3px 3px 0 rgba(212, 165, 116, 0.3);
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+
+    .title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--muted-gold), transparent);
+      border-radius: 2px;
     }
 
     .skill h5 {
@@ -433,35 +458,40 @@
       font-weight: 500;
       color: var(--deep-brown);
       margin-bottom: 1rem;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.5);
+      padding: 12px 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(212, 165, 116, 0.1) 100%);
       border-radius: 12px;
       border-left: 6px solid var(--muted-gold);
-      box-shadow: 3px 3px 0 rgba(139, 115, 85, 0.2);
+      border: 2px solid rgba(212, 165, 116, 0.4);
+      box-shadow: 3px 3px 0 rgba(139, 115, 85, 0.15);
       transition: all 0.3s ease;
+      text-align: center;
     }
 
     .skill h5:hover {
-      background: var(--light-cream);
-      transform: translateX(8px);
-      box-shadow: 6px 6px 0 rgba(139, 115, 85, 0.3);
+      background: linear-gradient(135deg, var(--light-cream) 0%, rgba(212, 165, 116, 0.2) 100%);
+      transform: translateX(8px) translateY(-3px);
+      box-shadow: 6px 6px 0 rgba(139, 115, 85, 0.25);
+      border-color: var(--muted-gold);
     }
 
     /* Timeline */
     .timeline-event {
-      background: rgba(255, 255, 255, 0.6);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 100%);
       border: 3px solid var(--deep-brown);
       border-radius: 15px;
       padding: 2rem;
       margin-bottom: 1.5rem;
       position: relative;
-      box-shadow: var(--pixel-shadow);
+      box-shadow: 6px 6px 0 rgba(139, 115, 85, 0.15);
       transition: all 0.3s ease;
+      border-left: 6px solid var(--muted-gold);
     }
 
     .timeline-event:hover {
-      transform: translateX(10px);
-      box-shadow: var(--pixel-glow), var(--pixel-shadow);
+      transform: translateX(8px) translateY(-3px);
+      box-shadow: 8px 8px 0 rgba(139, 115, 85, 0.25);
+      border-left-color: var(--deep-brown);
     }
 
     .date {
@@ -609,6 +639,12 @@
       gap: 2rem;
     }
 
+    @media (max-width: 768px) {
+      .boxspecial {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Responsive */
     @media (min-width: 768px) {
       .content-wrapper {
@@ -639,12 +675,18 @@
     @media (min-width: 1024px) {
       .masonry {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        grid-template-columns: 1fr;
         gap: 3rem;
+        max-width: 900px;
+        margin: 0 auto;
       }
 
       .post.item {
         margin-bottom: 3rem;
+      }
+
+      .masonry-item {
+        width: 100%;
       }
     }
 
